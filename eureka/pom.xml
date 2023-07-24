@@ -11,6 +11,13 @@
     <description>服务注册中心</description>
 
     <artifactId>eureka</artifactId>
+    <!--服务注册中心的服务端的jar包-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>
