@@ -1,4 +1,4 @@
-package com.videos.course.server.servcie.impl;
+package com.videos.course.server.service.impl;
 
 import com.videos.course.server.domain.${Domain};
 import com.videos.course.server.domain.${Domain}Example;
@@ -7,7 +7,7 @@ import com.videos.course.server.dto.${Domain}Dto;
 import com.videos.course.server.dto.PageDto;
 import com.videos.course.server.mapper.${Domain}Mapper;
 import com.videos.course.server.mapper.TestUsersMapper;
-import com.videos.course.server.servcie.${Domain}Service;
+import com.videos.course.server.service.${Domain}Service;
 import com.videos.course.server.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

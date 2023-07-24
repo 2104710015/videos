@@ -1,4 +1,4 @@
-package com.videos.course.server.servcie;
+package com.videos.course.server.service;
 
 
 

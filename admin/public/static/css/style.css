@@ -1,0 +1,7 @@
+/*表格内容上下居中显示*/
+.table td {
+  vertical-align: middle !important;
+}
+.centerDiv {
+  text-align: center!important;
+}

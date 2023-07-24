@@ -2,7 +2,7 @@ package com.videos.course.${model}.controller.admin;
 
 import com.videos.course.server.dto.${Domain}Dto;
 import com.videos.course.server.dto.PageDto;
-import com.videos.course.server.servcie.${Domain}Service;
+import com.videos.course.server.service.${Domain}Service;
 import com.videos.course.server.utils.ValidatorUtils;
 import com.videos.course.server.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
