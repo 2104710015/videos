@@ -3,6 +3,19 @@ server:
 spring:
   application:
     name: getaway
+  cloud:
+    gateway:
+      routes:
+        - id: system
+          uri: lb://SYSTEM  # http://127.0.0.1:9001
+          predicates:
+            - Path=/system/**
+
+
+        - id: customer
+          uri: http://127.0.0.1:9002
+          predicates:
+            - Path=/customer/**
 
 eureka:
   client:
