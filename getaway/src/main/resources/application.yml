@@ -5,21 +5,31 @@ spring:
     name: getaway
   cloud:
     gateway:
+      discovery:
+        locator:
+          #          enabled: true
+          lowerCaseServiceId: true
       routes:
         - id: system
-          uri: lb://SYSTEM  # http://127.0.0.1:9001
+          uri: http://127.0.0.1:9001 #lb://SYSTEM
           predicates:
             - Path=/system/**
-
-
+          filters:
+            - SwaggerHeaderFilter
+            #- StripPrefix=1
         - id: customer
-          uri: http://127.0.0.1:9002
+          uri: lb://CUSTOMER #http://127.0.0.1:9002
           predicates:
             - Path=/customer/**
-
+          filters:
+            - SwaggerHeaderFilter
+            #- StripPrefix=1
 eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
       defaultZone: http://127.0.0.1:8762/eureka
+logging:
+  level:
+    org.springframework:cloud.gateway: debug
