@@ -10,8 +10,8 @@ import io.swagger.annotations.ApiModelProperty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain=true)
-@ApiModel(value = "User模块")
-public class UserDto {
+@ApiModel(value = "Category模块")
+public class CategoryDto {
 
     /**
     * id
@@ -20,22 +20,22 @@ public class UserDto {
     private String id;
 
     /**
-    * 登陆名
+    * 父id
     */
-    @ApiModelProperty(value = " 登陆名")
-    private String loginName;
+    @ApiModelProperty(value = " 父id")
+    private String parent;
 
     /**
-    * 昵称
+    * 名称
     */
-    @ApiModelProperty(value = " 昵称")
+    @ApiModelProperty(value = " 名称")
     private String name;
 
     /**
-    * 密码
+    * 顺序
     */
-    @ApiModelProperty(value = " 密码")
-    private String password;
+    @ApiModelProperty(value = " 顺序")
+    private Integer sort;
 
 
 @Override
@@ -45,9 +45,9 @@ sb.append(getClass().getSimpleName());
 sb.append(" [");
 sb.append("Hash = ").append(hashCode());
     sb.append(", id=").append(id);
-    sb.append(", loginName=").append(loginName);
+    sb.append(", parent=").append(parent);
     sb.append(", name=").append(name);
-    sb.append(", password=").append(password);
+    sb.append(", sort=").append(sort);
 sb.append("]");
 return sb.toString();
 }

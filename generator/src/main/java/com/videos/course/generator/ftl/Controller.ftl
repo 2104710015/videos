@@ -8,7 +8,8 @@ import com.videos.course.server.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * @author 隔壁_老陈
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * 千里之外定位问题、瞬间修复依旧风骚……
  * @create 2021-04-11 18:07
  */
+@Api(tags = "${Domain}模块")
 @RestController
 @RequestMapping("/admin/${domain}")
 @Slf4j
@@ -30,6 +32,7 @@ public class ${Domain}Controller {
      * @param pageDto  分页的共用类
      * @return    返回共用的json数据vo模版格式
      */
+    @ApiOperation(value = "查询所有的数据信息")
     @PostMapping("/list")
     public ResponseVo getList(@RequestBody PageDto pageDto){
         ${domain}Service.getList(pageDto);
@@ -44,6 +47,7 @@ public class ${Domain}Controller {
      * @param ${domain}Dto  添加与修改的dto实体类
      * @return   返回共用的json数据vo模版格式
      */
+    @ApiOperation(value = "添加和修改的共用类")
     @PostMapping("/saveAndUpdate")
     public ResponseVo saveAndUpdate(@RequestBody ${Domain}Dto ${domain}Dto){
         /**
@@ -75,6 +79,7 @@ public class ${Domain}Controller {
      * @param id  删除的id编号
      * @return   返回共用的json数据vo模版格式
      */
+    @ApiOperation(value = "通过id编号进行 物理删除")
     @RequestMapping("/del/{id}")
     public ResponseVo del(@PathVariable String id){
 <#--

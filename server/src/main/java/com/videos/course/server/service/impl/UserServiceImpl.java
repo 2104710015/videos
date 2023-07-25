@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteByPrimaryKey(id);
     }
 
-    private  void save(User user){
+    private  void save(User  user){
 
         user.setId(UUIDUtils.random32());
         userMapper.insert(user);

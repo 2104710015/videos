@@ -1,5 +1,7 @@
 package com.videos.course.server.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,14 +17,19 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain=true)
+@ApiModel(value = "响应返回数据格式")
 public class ResponseVo<T> {
     //返回状态是否成功
+    @ApiModelProperty(value = " 返回状态是否成功")
     private Boolean boo = true;
     //返回信息的状态码
+    @ApiModelProperty(value = " 返回信息的状态码")
     private String code;
     //返回信息的描述
+    @ApiModelProperty(value = " 返回信息的描述")
     private String message;
     //返回数据
+    @ApiModelProperty(value = " 返回数据")
     private T content;
 
     public ResponseVo(Boolean boo, String code, String message) {

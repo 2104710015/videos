@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 <#list typeSet as type>
     <#if type=='LocalDateTime'>
@@ -17,12 +19,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain=true)
+@ApiModel(value = "${Domain}模块")
 public class ${Domain}Dto {
 
 <#list fieldList as field>
     /**
     * ${field.comment}
     */
+    @ApiModelProperty(value = " ${field.comment}")
     <#if field.javaType=='LocalDateTime'>
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     </#if>
