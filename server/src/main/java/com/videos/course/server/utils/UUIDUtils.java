@@ -16,8 +16,8 @@ public class UUIDUtils {
 	public static String random36() {
 		return null;
 	}
-/*	public static void main(String[] args) {
-		String r=random32();
-		System.out.println(r);
-	}*/
+//	public static void main(String[] args) {
+//		String r=random32();
+//		System.out.println(r);
+//	}
 }

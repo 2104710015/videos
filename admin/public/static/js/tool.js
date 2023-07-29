@@ -128,7 +128,7 @@ Tool = {
    */
   hasResource: function (id) {
     let _this = this;
-    let resources = _this.getLoginUser().resources;
+    let resources = _this.getLoginUser().resourceDtos;
     if (_this.isEmpty(resources)) {
       return false;
     }

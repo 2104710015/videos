@@ -1,12 +1,10 @@
 package com.videos.course.server.service.impl;
 
-import com.videos.course.server.domain.Category;
-import com.videos.course.server.domain.CategoryExample;
-import com.videos.course.server.domain.TestUsers;
+import com.videos.course.server.domin.Category;
+import com.videos.course.server.domin.CategoryExample;
 import com.videos.course.server.dto.CategoryDto;
 import com.videos.course.server.dto.PageDto;
 import com.videos.course.server.mapper.CategoryMapper;
-import com.videos.course.server.mapper.TestUsersMapper;
 import com.videos.course.server.service.CategoryService;
 import com.videos.course.server.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;

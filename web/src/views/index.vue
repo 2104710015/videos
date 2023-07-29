@@ -2,8 +2,9 @@
     <div>
         <main role="main">
             <section class="jumbotron text-center">
-
-                <div id="carouselExampleCaptions" class="carousel slide  "  data-ride="carousel">
+                <div class="row">
+                    <div class="carousel-all col-md-7 offset-md-1">
+                        <div id="carouselExampleCaptions" class="carousel slide  "  data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -13,8 +14,8 @@
                         <div class="carousel-item active">
                             <img src="../../public/static/img/1.png"   class="d-block w-100" alt="图片1">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>网络文化课程</h5>
-                                <p>免费预约试听课，分析学生学情，量身定制专属课程</p>
+                                <!-- <h5>网络文化课程</h5>
+                                <p>免费预约试听课，分析学生学情，量身定制专属课程</p> -->
                                 <p>
                                     <router-link to="/list" class="btn btn-primary my-2 p-3 font-weight-bold">点击进入所有课程</router-link>
                                 </p>
@@ -23,8 +24,7 @@
                         <div class="carousel-item col-md-12">
                             <img src="../../public/static/img/2.png"   class="d-block w-100" alt="图片2">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>网络文化课程</h5>
-                                <p>免费预约试听课，分析学生学情，量身定制专属课程</p>
+                                
                                 <p>
                                     <router-link to="/list" class="btn btn-primary my-2 p-3 font-weight-bold">点击进入所有课程</router-link>
                                 </p>
@@ -33,8 +33,7 @@
                         <div class="carousel-item col-md-12">
                             <img src="../../public/static/img/3.png"   class="d-block w-100" alt="图片3">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>网络文化课程</h5>
-                                <p>免费预约试听课，分析学生学情，量身定制专属课程</p>
+                             
                                 <p>
                                     <router-link to="/list" class="btn btn-primary my-2 p-3 font-weight-bold">点击进入所有课程</router-link>
                                 </p>
@@ -51,9 +50,18 @@
                         <span class="sr-only">Next</span>
                     </button>
                 </div>
+                    </div>
+                    <div class="carousel-right col-md-3">
+                        <div class="notice-content">
+                          <h2>最新公告</h2>
+                          <anno></anno>
+                        </div>
+                    </div>
+                </div>
+            
             </section>
 
-            <div class="album py-5 bg-light">
+            <div class="course-new col-md-12" style="margin-top: 60px">
                 <div class="container">
                     <div class="title1">最新上线</div>
                     <div class="row">
@@ -63,20 +71,19 @@
                         </div>
                     </div>
 
-                    <div class="title1">优质课程</div>
+                    <!-- <div class="title1">优质课程</div>
                     <div class="row">
-                        <!--最新的3门课程-->
                         <div v-for="o in news" class="col-md-4"  v-bind:key="o" >
                             <then-course v-bind:course="o"></then-course>
                         </div>
-                    </div>
-                    <div class="title1">学员推挤</div>
+                    </div> -->
+                    <!-- <div class="title1">学员推挤</div>
                     <div class="row">
-                        <!--最新的3门课程-->
+
                         <div v-for="o in news" class="col-md-4"  v-bind:key="o" >
                             <then-course v-bind:course="o"></then-course>
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -88,10 +95,14 @@
 </template>
 
 <script>
+    import anno from "../components/anno";
     import ThenCourse from "../components/then-course";
     export default {
         name: "index",
-        components: {ThenCourse},
+        components: {
+          ThenCourse,
+          anno
+        },
         data: function () {
             return {
                 news: [],
@@ -169,6 +180,13 @@
         -webkit-text-stroke: 1px black;
         letter-spacing: 0.04em;
         font-size: 2rem;
+    }
+    .notice-content {
+        border: 2px solid #834444; /* 设置边框为2像素宽度的白色实线 */
+        padding: 10px; /* 设置内边距为10像素 */
+        padding-left: 20px; /* 设置左边距为20像素 */
+        padding-right: 20px; /* 设置右边距为20像素 */
+        height: 295px;
     }
 
 

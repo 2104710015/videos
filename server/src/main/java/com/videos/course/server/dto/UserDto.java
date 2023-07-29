@@ -36,6 +36,11 @@ public class UserDto {
     */
     @ApiModelProperty(value = " 密码")
     private String password;
+    @ApiModelProperty(value = " 验证码")
+    private String imageCode;
+    @ApiModelProperty(value = " 验证码")
+    private String codeToKen;
+
 
 
 @Override
@@ -48,6 +53,8 @@ sb.append("Hash = ").append(hashCode());
     sb.append(", loginName=").append(loginName);
     sb.append(", name=").append(name);
     sb.append(", password=").append(password);
+    sb.append(", codeToKen=").append(codeToKen);
+    sb.append(", imageCode=").append(imageCode);
 sb.append("]");
 return sb.toString();
 }

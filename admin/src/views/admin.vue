@@ -360,123 +360,30 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="" v-show="hasResource('01')" >
+                    <li class="" v-for="(itme,index) in resourceList"
+                        v-show="itme.id>0&&itme.id<100" >
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-desktop"></i>
                             <span class="menu-text">
-								系统管理
-							</span>
-
+                              {{itme.name}}
+                            </span>
                             <b class="arrow fa fa-angle-down"></b>
                         </a>
 
                         <b class="arrow"></b>
 
                         <ul class="submenu">
-                            <li v-show="hasResource('0101')" class=""  id="system-user-sidebar">
-                                <router-link to="/system/user" class="dropdown-toggle">
+                            <li v-for="(itmes,index) in resourceList"
+                                v-show="itmes.parent==itme.id" class=""  id="system-user-sidebar">
+                                <router-link :to="{name:itmes.page}" class="dropdown-toggle">
                                     <i class="menu-icon fa fa-caret-right"></i>
-                                      用户管理
+                                      {{itmes.name}}:{{itmes.page}}
                                 </router-link>
-                                <b class="arrow"></b>
-                            </li>
-
-                            <li  v-show="hasResource('0102')" class="" id="system-resource-sidebar">
-                                <router-link to="/system/resource">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    资源管理
-                                </router-link>
-
-                                <b class="arrow"></b>
-                            </li>
-                            <li  v-show="hasResource('0103')"  class="" id="system-role-sidebar">
-                                <router-link to="/system/role">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    角色管理
-                                </router-link>
-
                                 <b class="arrow"></b>
                             </li>
                         </ul>
                     </li>
-
-
-
-                    <li class="" >
-                        <a href="#" class="dropdown-toggle">
-                            <i class="menu-icon fa fa-list"></i>
-                            <span class="menu-text">
-								业务管理
-							</span>
-                            <b class="arrow fa fa-angle-down"></b>
-                        </a>
-
-                        <b class="arrow"></b>
-
-                        <ul class="submenu" >
-                            <li class="" id="business-category-sidebar">
-                                <router-link to="/business/category" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    分类管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="" id="business-teacher-sidebar">
-                                <router-link to="/business/teacher" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    讲师管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="" id="business-member-sidebar">
-                                <router-link to="/business/member" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    会员管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="" id="business-course-sidebar">
-                                <router-link to="/business/course" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    课程管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="" id="business-sms-sidebar">
-                                <router-link to="/business/sms" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    短信管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="" id="file-file-sidebar">
-                                <router-link to="/file/file" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    文件管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-
-                         <!--   <li class="active" id="business-chapter-sidebar">
-                                <router-link to="/business/chapter" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    大章管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
-                            <li class="active" id="business-section-sidebar">
-                                <router-link to="/business/section" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    小章管理
-                                </router-link>
-                                <b class="arrow"></b>
-                            </li>
--->
-                        </ul>
-                    </li>
-
-
-
+<!--                    {{resourceList}}-->
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -524,6 +431,7 @@
         data: function() {
             return {
                 loginUser: {},
+              resourceList:[],
             }
         },
         mounted: function () {
@@ -545,7 +453,7 @@
             $.getScript('/ace/assets/css/ace.min.css');
            $.getScript('/ace/assets/js/ace.min.js');
             _this.loginUser = Tool.getLoginUser();
-
+                console.log('_this.$route.name',_this.$route.name);
             if (!_this.hasResourceRouter(_this.$route.name)) {
                 _this.$router.push("/login");
             }
@@ -555,7 +463,8 @@
             $route:{
                 handler:function (val,oldVal) {
                     console.log("------>页面跳转",val,oldVal);
-                    let _this=this;
+                    let _this = this;
+                    console.log('val.name',val.name);
 
                     if (!_this.hasResourceRouter(val.name)) {
                         _this.$router.push("/login");
@@ -576,7 +485,8 @@
              */
             hasResourceRouter(router) {
                 let _this = this;
-                let resources = Tool.getLoginUser().resources;
+                let resources = Tool.getLoginUser().resourceDtos;
+                _this.resourceList=resources;
                 if (Tool.isEmpty(resources)) {
                     return false;
                 }
@@ -586,6 +496,7 @@
                     }
                 }
                 return false;
+                // return true;
             },
             /**
              * 查找是否有权限
@@ -619,14 +530,15 @@
             logout () {
                 let _this = this;
                 Loading.show();
-                _this.$ajax.get(process.env.VUE_APP_SERVER + '/system/admin/user/logout/'+_this.loginUser.toKen).then((response)=>{
+                _this.$ajax.get(process.env.VUE_APP_SERVER + '/system/admin/user/logout/'+_this.loginUser.toKen)
+                    .then((response)=>{
                     Loading.hide();
                     let resp = response.data;
                     if (resp.boo) {
-                        Tool.removeLoginUser();
-                        _this.$router.push("/login")
-                    } else {
-                        prompt.warning(resp.message)
+                        Tool.removeLoginUser();//进行删除本地的用户信息
+                        _this.$router.push("/login")//在进行跳转登录界面
+                    } else {//如false
+                        prompt.warning(resp.message)//提示异常
                     }
                 });
             },

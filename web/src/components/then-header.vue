@@ -32,17 +32,32 @@
                                 <router-link class="nav-link" to="/list">全部课程</router-link>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">公告</a>
+                              <router-link class="nav-link" to="/myStudy">我的学习</router-link>
+                            </li>
+                            <li class="nav-item dropdown active">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                帮助中心
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <router-link class="nav-link" to="/helpDocument" style="color:black;">帮助文档</router-link>
+                                <div class="dropdown-divider"></div>
+                                <router-link class="nav-link" to="/updateInfo" style="color:black;">更新信息</router-link>
+                              </div>
                             </li>
                             <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                    更多
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">关于我们</a>
-                                    <a class="dropdown-item" href="#">渠道合作</a>
+<!--                                    <a class="dropdown-item" href="#">关于我们</a>-->
+<!--                                    <a class="dropdown-item" href="#">渠道合作</a>-->
+
+<!--                                    <a class="dropdown-item" href="#">更多信息</a>-->
+                                    <router-link class="nav-link" to="#" style="color:black;">关于我们</router-link>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">更多信息</a>
+                                    <router-link class="nav-link" to="#" style="color:black;">渠道合作</router-link>
+                                    <div class="dropdown-divider"></div>
+                                    <router-link class="nav-link" to="#" style="color:black;">更多信息</router-link>
                                 </div>
                             </li>
                         </ul>

@@ -1,8 +1,8 @@
 <template>
-    <div class="main-container">
+    <div class="main-container" >
         <div class="main-content">
             <div class="row">
-                <div class="col-sm-10 col-sm-offset-1">
+                <div class="col-sm-12 col-sm-offset-3" style="height: 735px;">
                     <div class="login-container">
                         <div class="center">
                             <h1>
@@ -15,7 +15,7 @@
 
                         <div class="space-6"></div>
 
-                        <div class="position-relative">
+                        <div class="position-relative" style="margin-top: 150px;">
                             <div id="login-box" class="login-box visible widget-box no-border">
                                 <div class="widget-body">
                                     <div class="widget-main">
@@ -109,7 +109,7 @@
             return {
                 user:{},
                 remember:true, //默认是勾选上的，记得我
-                imageCodeToken: "",
+                codeToKen: "",
             }
         },
         mounted: function () {
@@ -149,12 +149,13 @@
                     _this.user.password = hex_md5(_this.user.password + KEY);
                 }
                 //设置token,每次都是随机的
-                _this.user.imageCodeToken = _this.imageCodeToken;
+                _this.user.codeToKen = _this.codeToKen;
                 Loading.show();
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/login',_this.user)
                     .then((response)=>{
                         Loading.hide();
                         $("#form-modal").modal("hide");
+                        console.log('response',response);
                         if (response.data.boo) {
                            // prompt.success('用户登陆成功!');
                             console.log("登录成功：", response.data.content);
@@ -191,8 +192,8 @@
              */
             loadImageCode: function () {
                 let _this = this;
-                _this.imageCodeToken = Tool.uuid(8);
-                $('#image-code').attr('src', process.env.VUE_APP_SERVER + '/system/admin/kaptcha/image-code/' + _this.imageCodeToken);
+                _this.codeToKen = Tool.uuid(8);
+                $('#image-code').attr('src', process.env.VUE_APP_SERVER + '/system/admin/kaptcha/imageCode/' + _this.codeToKen);
             },
         }
     }
@@ -202,5 +203,11 @@
     .input-group-addon {
         padding: 0;
         cursor:pointer;
+    }
+    .main-content{
+      background-image: url("../../public/static/image/login-background.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 </style>
