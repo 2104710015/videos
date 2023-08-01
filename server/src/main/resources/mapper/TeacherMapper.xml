@@ -9,6 +9,7 @@
     <result column="position" jdbcType="VARCHAR" property="position" />
     <result column="motto" jdbcType="VARCHAR" property="motto" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="userid" jdbcType="CHAR" property="userid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, nickname, image, `position`, motto, intro
+    id, `name`, nickname, image, `position`, motto, intro, userid
   </sql>
   <select id="selectByExample" parameterType="com.videos.course.server.domin.TeacherExample" resultMap="BaseResultMap">
     select
@@ -86,10 +87,16 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from teacher
     where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectByUsersId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where userid = #{id,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from teacher
@@ -104,10 +111,10 @@
   <insert id="insert" parameterType="com.videos.course.server.domin.Teacher">
     insert into teacher (id, `name`, nickname, 
       image, `position`, motto, 
-      intro)
+      intro, userid)
     values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{image,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{motto,jdbcType=VARCHAR}, 
-      #{intro,jdbcType=VARCHAR})
+      #{intro,jdbcType=VARCHAR}, #{userid,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.videos.course.server.domin.Teacher">
     insert into teacher
@@ -133,6 +140,9 @@
       <if test="intro != null">
         intro,
       </if>
+      <if test="userid != null">
+        userid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +165,9 @@
       </if>
       <if test="intro != null">
         #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +201,9 @@
       <if test="record.intro != null">
         intro = #{record.intro,jdbcType=VARCHAR},
       </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +217,8 @@
       image = #{record.image,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       motto = #{record.motto,jdbcType=VARCHAR},
-      intro = #{record.intro,jdbcType=VARCHAR}
+      intro = #{record.intro,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +244,9 @@
       <if test="intro != null">
         intro = #{intro,jdbcType=VARCHAR},
       </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=CHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -237,7 +257,8 @@
       image = #{image,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       motto = #{motto,jdbcType=VARCHAR},
-      intro = #{intro,jdbcType=VARCHAR}
+      intro = #{intro,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 @Slf4j
 public class AnnoController {
         //输出日志的服务名称
-     public static final String BUSINESS_NAME="SYSTEM_NAME服务之(AnnoController)";
+     public static final String BUSINESS_NAME="CUSTOMER_NAME服务之(AnnoController)";
     @Autowired
     private AnnoService annoService;
 

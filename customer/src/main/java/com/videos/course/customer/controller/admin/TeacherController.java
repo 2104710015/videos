@@ -2,11 +2,13 @@ package com.videos.course.customer.controller.admin;
 
 import com.videos.course.server.dto.TeacherDto;
 import com.videos.course.server.dto.PageDto;
+import com.videos.course.server.enums.BusinessExceptionEnum;
 import com.videos.course.server.service.TeacherService;
 import com.videos.course.server.utils.ValidatorUtils;
 import com.videos.course.server.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 @Slf4j
 public class TeacherController {
         //输出日志的服务名称
-     public static final String BUSINESS_NAME="SYSTEM_NAME服务之(TeacherController)";
+     public static final String BUSINESS_NAME="CUSTOMER_NAME服务之(TeacherController)";
     @Autowired
     private TeacherService teacherService;
 
@@ -39,6 +41,29 @@ public class TeacherController {
 
        ResponseVo responseVo = new ResponseVo();
        responseVo.setCode("200").setMessage("查询成功").setContent(pageDto);
+        return  responseVo;
+    }
+
+
+    @ApiOperation(value = "通过用户id查询所有的数据信息")
+    @GetMapping("/getByUsersId/{id}")
+    public ResponseVo getByUsersId(@PathVariable("id") String id){
+        ResponseVo responseVo = new ResponseVo();
+        //进行断言
+        ValidatorUtils.require(id,"用户编号");
+        TeacherDto teacherDto=teacherService.getByUsersId(id);
+        if (teacherDto!=null){
+            responseVo
+                    .setCode(String.valueOf(BusinessExceptionEnum.OK_STATUS))
+                    .setMessage(BusinessExceptionEnum.OK_STATUS.getDesc())
+                    .setContent(teacherDto);
+        }else {
+            responseVo
+                    .setBoo(false)
+                    .setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS))
+                    .setMessage(BusinessExceptionEnum.NOT_STATUS.getDesc());
+        }
+
         return  responseVo;
     }
 

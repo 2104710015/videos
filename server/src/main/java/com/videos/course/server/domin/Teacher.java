@@ -15,6 +15,8 @@ public class Teacher {
 
     private String intro;
 
+    private String userid;
+
     public String getId() {
         return id;
     }
@@ -71,6 +73,14 @@ public class Teacher {
         this.intro = intro;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -84,6 +94,7 @@ public class Teacher {
         sb.append(", position=").append(position);
         sb.append(", motto=").append(motto);
         sb.append(", intro=").append(intro);
+        sb.append(", userid=").append(userid);
         sb.append("]");
         return sb.toString();
     }

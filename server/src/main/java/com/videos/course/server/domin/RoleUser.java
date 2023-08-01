@@ -1,11 +1,11 @@
 package com.videos.course.server.domin;
 
-public class UserStudent {
+public class RoleUser {
     private String id;
 
-    private String userid;
+    private String roleId;
 
-    private String studentid;
+    private String userId;
 
     public String getId() {
         return id;
@@ -15,20 +15,20 @@ public class UserStudent {
         this.id = id;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
-    public String getStudentid() {
-        return studentid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setStudentid(String studentid) {
-        this.studentid = studentid;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class UserStudent {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", userid=").append(userid);
-        sb.append(", studentid=").append(studentid);
+        sb.append(", roleId=").append(roleId);
+        sb.append(", userId=").append(userId);
         sb.append("]");
         return sb.toString();
     }

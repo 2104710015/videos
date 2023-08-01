@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.videos.course.server.mapper.UserTeacherMapper">
-  <resultMap id="BaseResultMap" type="com.videos.course.server.domin.UserTeacher">
+<mapper namespace="com.videos.course.server.mapper.RoleUserMapper">
+  <resultMap id="BaseResultMap" type="com.videos.course.server.domin.RoleUser">
     <id column="id" jdbcType="CHAR" property="id" />
-    <result column="userid" jdbcType="CHAR" property="userid" />
-    <result column="teacherid" jdbcType="CHAR" property="teacherid" />
+    <result column="role_id" jdbcType="CHAR" property="roleId" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, teacherid
+    id, role_id, user_id
   </sql>
-  <select id="selectByExample" parameterType="com.videos.course.server.domin.UserTeacherExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.videos.course.server.domin.RoleUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_teacher
+    from role_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,65 +84,65 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user_teacher
+    from role_user
     where id = #{id,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from user_teacher
+    delete from role_user
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.videos.course.server.domin.UserTeacherExample">
-    delete from user_teacher
+  <delete id="deleteByExample" parameterType="com.videos.course.server.domin.RoleUserExample">
+    delete from role_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.videos.course.server.domin.UserTeacher">
-    insert into user_teacher (id, userid, teacherid)
-    values (#{id,jdbcType=CHAR}, #{userid,jdbcType=CHAR}, #{teacherid,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.videos.course.server.domin.RoleUser">
+    insert into role_user (id, role_id, user_id)
+    values (#{id,jdbcType=CHAR}, #{roleId,jdbcType=CHAR}, #{userId,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.videos.course.server.domin.UserTeacher">
-    insert into user_teacher
+  <insert id="insertSelective" parameterType="com.videos.course.server.domin.RoleUser">
+    insert into role_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="userid != null">
-        userid,
+      <if test="roleId != null">
+        role_id,
       </if>
-      <if test="teacherid != null">
-        teacherid,
+      <if test="userId != null">
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=CHAR},
       </if>
-      <if test="userid != null">
-        #{userid,jdbcType=CHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=CHAR},
       </if>
-      <if test="teacherid != null">
-        #{teacherid,jdbcType=CHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.videos.course.server.domin.UserTeacherExample" resultType="java.lang.Long">
-    select count(*) from user_teacher
+  <select id="countByExample" parameterType="com.videos.course.server.domin.RoleUserExample" resultType="java.lang.Long">
+    select count(*) from role_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user_teacher
+    update role_user
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=CHAR},
       </if>
-      <if test="record.userid != null">
-        userid = #{record.userid,jdbcType=CHAR},
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=CHAR},
       </if>
-      <if test="record.teacherid != null">
-        teacherid = #{record.teacherid,jdbcType=CHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -150,30 +150,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user_teacher
+    update role_user
     set id = #{record.id,jdbcType=CHAR},
-      userid = #{record.userid,jdbcType=CHAR},
-      teacherid = #{record.teacherid,jdbcType=CHAR}
+      role_id = #{record.roleId,jdbcType=CHAR},
+      user_id = #{record.userId,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.videos.course.server.domin.UserTeacher">
-    update user_teacher
+  <update id="updateByPrimaryKeySelective" parameterType="com.videos.course.server.domin.RoleUser">
+    update role_user
     <set>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=CHAR},
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=CHAR},
       </if>
-      <if test="teacherid != null">
-        teacherid = #{teacherid,jdbcType=CHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.videos.course.server.domin.UserTeacher">
-    update user_teacher
-    set userid = #{userid,jdbcType=CHAR},
-      teacherid = #{teacherid,jdbcType=CHAR}
+  <update id="updateByPrimaryKey" parameterType="com.videos.course.server.domin.RoleUser">
+    update role_user
+    set role_id = #{roleId,jdbcType=CHAR},
+      user_id = #{userId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

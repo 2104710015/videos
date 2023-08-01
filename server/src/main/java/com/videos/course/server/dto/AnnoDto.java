@@ -45,6 +45,18 @@ public class AnnoDto {
     @ApiModelProperty(value = " 状态")
     private String status;
 
+    /**
+    * 
+    */
+    @ApiModelProperty(value = " ")
+    private String courseid;
+
+    /**
+    * 
+    */
+    @ApiModelProperty(value = " ")
+    private String teacherid;
+
 
 @Override
 public String toString() {
@@ -57,6 +69,8 @@ sb.append("Hash = ").append(hashCode());
     sb.append(", content=").append(content);
     sb.append(", releasetime=").append(releasetime);
     sb.append(", status=").append(status);
+    sb.append(", courseid=").append(courseid);
+    sb.append(", teacherid=").append(teacherid);
 sb.append("]");
 return sb.toString();
 }

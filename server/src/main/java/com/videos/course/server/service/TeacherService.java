@@ -18,4 +18,6 @@ public interface TeacherService {
     public void saveAndUpdate(TeacherDto teacherDto);
 
     public void del(String id);
+
+    TeacherDto getByUsersId(String id);
 }

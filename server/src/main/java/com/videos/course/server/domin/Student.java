@@ -15,6 +15,8 @@ public class Student {
 
     private String motto;
 
+    private String userid;
+
     public String getId() {
         return id;
     }
@@ -71,6 +73,14 @@ public class Student {
         this.motto = motto;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -84,6 +94,7 @@ public class Student {
         sb.append(", sex=").append(sex);
         sb.append(", phone=").append(phone);
         sb.append(", motto=").append(motto);
+        sb.append(", userid=").append(userid);
         sb.append("]");
         return sb.toString();
     }

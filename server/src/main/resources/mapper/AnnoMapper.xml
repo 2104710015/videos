@@ -6,6 +6,8 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="releasetime" jdbcType="DATE" property="releasetime" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="courseid" jdbcType="CHAR" property="courseid" />
+    <result column="teacherid" jdbcType="CHAR" property="teacherid" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.videos.course.server.domin.Anno">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, releasetime, `status`
+    id, title, releasetime, `status`, courseid, teacherid
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -124,9 +126,11 @@
   </delete>
   <insert id="insert" parameterType="com.videos.course.server.domin.Anno">
     insert into anno (id, title, releasetime, 
-      `status`, content)
+      `status`, courseid, teacherid, 
+      content)
     values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{releasetime,jdbcType=DATE}, 
-      #{status,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+      #{status,jdbcType=VARCHAR}, #{courseid,jdbcType=CHAR}, #{teacherid,jdbcType=CHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.videos.course.server.domin.Anno">
     insert into anno
@@ -142,6 +146,12 @@
       </if>
       <if test="status != null">
         `status`,
+      </if>
+      <if test="courseid != null">
+        courseid,
+      </if>
+      <if test="teacherid != null">
+        teacherid,
       </if>
       <if test="content != null">
         content,
@@ -159,6 +169,12 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null">
+        #{courseid,jdbcType=CHAR},
+      </if>
+      <if test="teacherid != null">
+        #{teacherid,jdbcType=CHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -186,6 +202,12 @@
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=VARCHAR},
       </if>
+      <if test="record.courseid != null">
+        courseid = #{record.courseid,jdbcType=CHAR},
+      </if>
+      <if test="record.teacherid != null">
+        teacherid = #{record.teacherid,jdbcType=CHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -200,6 +222,8 @@
       title = #{record.title,jdbcType=VARCHAR},
       releasetime = #{record.releasetime,jdbcType=DATE},
       `status` = #{record.status,jdbcType=VARCHAR},
+      courseid = #{record.courseid,jdbcType=CHAR},
+      teacherid = #{record.teacherid,jdbcType=CHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,7 +234,9 @@
     set id = #{record.id,jdbcType=CHAR},
       title = #{record.title,jdbcType=VARCHAR},
       releasetime = #{record.releasetime,jdbcType=DATE},
-      `status` = #{record.status,jdbcType=VARCHAR}
+      `status` = #{record.status,jdbcType=VARCHAR},
+      courseid = #{record.courseid,jdbcType=CHAR},
+      teacherid = #{record.teacherid,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +253,12 @@
       <if test="status != null">
         `status` = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="courseid != null">
+        courseid = #{courseid,jdbcType=CHAR},
+      </if>
+      <if test="teacherid != null">
+        teacherid = #{teacherid,jdbcType=CHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -238,6 +270,8 @@
     set title = #{title,jdbcType=VARCHAR},
       releasetime = #{releasetime,jdbcType=DATE},
       `status` = #{status,jdbcType=VARCHAR},
+      courseid = #{courseid,jdbcType=CHAR},
+      teacherid = #{teacherid,jdbcType=CHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -245,7 +279,9 @@
     update anno
     set title = #{title,jdbcType=VARCHAR},
       releasetime = #{releasetime,jdbcType=DATE},
-      `status` = #{status,jdbcType=VARCHAR}
+      `status` = #{status,jdbcType=VARCHAR},
+      courseid = #{courseid,jdbcType=CHAR},
+      teacherid = #{teacherid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

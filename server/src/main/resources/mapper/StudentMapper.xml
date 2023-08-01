@@ -9,6 +9,7 @@
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="motto" jdbcType="VARCHAR" property="motto" />
+    <result column="userid" jdbcType="CHAR" property="userid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, nickname, image, sex, phone, motto
+    id, `name`, nickname, image, sex, phone, motto, userid
   </sql>
   <select id="selectByExample" parameterType="com.videos.course.server.domin.StudentExample" resultMap="BaseResultMap">
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="com.videos.course.server.domin.Student">
     insert into studen (id, `name`, nickname, 
       image, sex, phone, 
-      motto)
+      motto, userid)
     values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{image,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{motto,jdbcType=VARCHAR})
+      #{motto,jdbcType=VARCHAR}, #{userid,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.videos.course.server.domin.Student">
     insert into studen
@@ -133,6 +134,9 @@
       <if test="motto != null">
         motto,
       </if>
+      <if test="userid != null">
+        userid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="motto != null">
         #{motto,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.motto != null">
         motto = #{record.motto,jdbcType=VARCHAR},
       </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       image = #{record.image,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
-      motto = #{record.motto,jdbcType=VARCHAR}
+      motto = #{record.motto,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="motto != null">
         motto = #{motto,jdbcType=VARCHAR},
       </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=CHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -237,7 +251,8 @@
       image = #{image,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      motto = #{motto,jdbcType=VARCHAR}
+      motto = #{motto,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

@@ -6,6 +6,7 @@ import com.videos.course.server.dto.TeacherDto;
 import com.videos.course.server.dto.PageDto;
 import com.videos.course.server.mapper.TeacherMapper;
 import com.videos.course.server.service.TeacherService;
+import com.videos.course.server.utils.CopyUtils;
 import com.videos.course.server.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -65,6 +66,13 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void del(String id) {
         teacherMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public TeacherDto getByUsersId(String id) {
+        Teacher teacher = teacherMapper.selectByUsersId(id);
+        TeacherDto copy = CopyUtils.copy(teacher, TeacherDto.class);
+        return copy;
     }
 
     private  void save(Teacher  teacher){

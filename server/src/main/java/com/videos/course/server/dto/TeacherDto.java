@@ -55,6 +55,12 @@ public class TeacherDto {
     @ApiModelProperty(value = " 简介")
     private String intro;
 
+    /**
+    * 用户id
+    */
+    @ApiModelProperty(value = " 用户id")
+    private String userid;
+
 
 @Override
 public String toString() {
@@ -69,6 +75,7 @@ sb.append("Hash = ").append(hashCode());
     sb.append(", position=").append(position);
     sb.append(", motto=").append(motto);
     sb.append(", intro=").append(intro);
+    sb.append(", userid=").append(userid);
 sb.append("]");
 return sb.toString();
 }

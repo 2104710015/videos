@@ -11,6 +11,10 @@ public class Anno {
 
     private String status;
 
+    private String courseid;
+
+    private String teacherid;
+
     private String content;
 
     public String getId() {
@@ -45,6 +49,22 @@ public class Anno {
         this.status = status;
     }
 
+    public String getCourseid() {
+        return courseid;
+    }
+
+    public void setCourseid(String courseid) {
+        this.courseid = courseid;
+    }
+
+    public String getTeacherid() {
+        return teacherid;
+    }
+
+    public void setTeacherid(String teacherid) {
+        this.teacherid = teacherid;
+    }
+
     public String getContent() {
         return content;
     }
@@ -63,6 +83,8 @@ public class Anno {
         sb.append(", title=").append(title);
         sb.append(", releasetime=").append(releasetime);
         sb.append(", status=").append(status);
+        sb.append(", courseid=").append(courseid);
+        sb.append(", teacherid=").append(teacherid);
         sb.append(", content=").append(content);
         sb.append("]");
         return sb.toString();
