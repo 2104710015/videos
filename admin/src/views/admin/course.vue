@@ -225,6 +225,7 @@
 </template>
 <script>
     import  Pagination from  "../../components/pagination";
+    import category from "@/views/admin/category";
     export default {
         components: {Pagination,File},
         name: 'course',
@@ -354,22 +355,70 @@
               return;
             }
             //获取对应的课程选中的分类
-            let categoryNodes = _this.tree.getCheckedNodes();
+            let categoryNodes = _this.zTree.getCheckedNodes();
             if (Tool.isEmpty(categoryNodes)){
               prompt.warning("请选择对应的分类信息");
               return;
             }
             //将获得到的分类的信息进行赋值
             _this.course.categorys=categoryNodes;
+            //进行给添加的数据进行赋值老师的id
+            _this.course.teacherId=_this.teacher.id;
             //调用后台的添加
             Loading.show();
             _this.$ajax.post(process.env.VUE_APP_SERVER + "/customer/admin/course/saveAndUpdate",_this.course)
                 .then((res) => {
                   Loading.hide();
                   console.log("添加新课程的信息",res);
+                  if (res.data.boo){
+                    $("#form-modal").modal("hide");
+                    prompt.success("数据操作成功");
+                    //无论添加成功还失败都要进行查询一次
+                    _this.list(1);
+                  }else {
+                    prompt.error(res.data.message);
+                  }
 
                 })
           },
+          update(data){
+            //调用对应的弹窗
+            let _this = this;
+            //获取到课程信息
+            _this.course=$.extend({},data);
+            //调用对应的方法
+            //查询当前课程对应的分类信息
+            _this.courseListCategory(_this.course.id);
+
+            //触发对应的弹窗
+            $("#form-modal").modal("show");
+
+          },
+          courseListCategory(courseId){
+            if (1!=1
+                ||!Validator.require(courseId,"课程编号")
+            ){
+              return;
+            }
+            let _this = this;
+            _this.$ajax.get(process.env.VUE_APP_SERVER + "/customer/admin/course/list-category/"+courseId)
+                .then((res) => {
+                  console.log("获取到分类数据",res)
+                  if (res.data.boo){
+                    let courseCategory=res.data.content;
+                    //勾选上查询到的分类信息
+                    _this.zTree.checkAllNodes(false);//取消全部选中
+                    for (let i = 0; i < courseCategory.length; i++) {
+                      let node=_this.zTree.getNodeByParam("id",courseCategory[i].categoryId);
+                      _this.zTree.checkNode(node,true);
+                    }
+                  }
+                })
+          },
+          openSort(){
+            let _this = this;
+
+          }
         }
     }
 </script>

@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -101,6 +103,11 @@ public class CourseDto {
     */
     @ApiModelProperty(value = " 讲师|teacher.id")
     private String teacherId;
+    /**
+     * 引入课程的分类
+     */
+    @ApiModelProperty(value = " 课程的分类")
+    private List<CategoryDto> categorys;
 
 
 @Override
@@ -123,7 +130,8 @@ sb.append("Hash = ").append(hashCode());
     sb.append(", createdAt=").append(createdAt);
     sb.append(", updatedAt=").append(updatedAt);
     sb.append(", teacherId=").append(teacherId);
-sb.append("]");
+    sb.append(", categorys=").append(categorys);
+    sb.append("]");
 return sb.toString();
 }
 

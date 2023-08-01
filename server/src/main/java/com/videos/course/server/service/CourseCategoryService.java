@@ -2,6 +2,7 @@ package com.videos.course.server.service;
 
 
 
+import com.videos.course.server.dto.CategoryDto;
 import com.videos.course.server.dto.CourseCategoryDto;
 import com.videos.course.server.dto.PageDto;
 
@@ -18,4 +19,8 @@ public interface CourseCategoryService {
     public void saveAndUpdate(CourseCategoryDto courseCategoryDto);
 
     public void del(String id);
+
+    int saveBatchs(String id, List<CategoryDto> categorys);
+
+    List<CourseCategoryDto> getListCategory(String courseId);
 }

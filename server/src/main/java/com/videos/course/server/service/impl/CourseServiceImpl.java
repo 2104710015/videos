@@ -6,13 +6,16 @@ import com.videos.course.server.dto.CourseDto;
 import com.videos.course.server.dto.PageDto;
 import com.videos.course.server.mapper.CourseCategoryMapper;
 import com.videos.course.server.mapper.CourseMapper;
+import com.videos.course.server.service.CourseCategoryService;
 import com.videos.course.server.service.CourseService;
 import com.videos.course.server.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.videos.course.server.utils.ValidatorUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +38,7 @@ public class CourseServiceImpl implements CourseService {
     private CourseMapper courseMapper;
 
     @Autowired
-    private CourseCategoryMapper courseCategoryMapper;
+    private CourseCategoryService courseCategoryService;
 
     @Override
     public  void getList(PageDto pageDto) {
@@ -66,6 +69,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public void saveAndUpdate(CourseDto courseDto) {
         Course course = new Course();
         BeanUtils.copyProperties(courseDto, course);
@@ -77,8 +81,10 @@ public class CourseServiceImpl implements CourseService {
         }else {
            save(course);
         }
+        String id=course.getId();
+        ValidatorUtils.require(id,"课程编号");
         //对课程的分类信息进行保存=>对课程的分类表操作
-
+        courseCategoryService.saveBatchs(id,courseDto.getCategorys());
     }
 
     @Override

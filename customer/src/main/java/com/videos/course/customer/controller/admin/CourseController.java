@@ -1,7 +1,9 @@
 package com.videos.course.customer.controller.admin;
 
+import com.videos.course.server.dto.CourseCategoryDto;
 import com.videos.course.server.dto.CourseDto;
 import com.videos.course.server.dto.PageDto;
+import com.videos.course.server.service.CourseCategoryService;
 import com.videos.course.server.service.CourseService;
 import com.videos.course.server.utils.ValidatorUtils;
 import com.videos.course.server.vo.ResponseVo;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+import java.util.List;
 
 /**
  * @author 隔壁_老陈
@@ -26,6 +30,9 @@ public class CourseController {
      public static final String BUSINESS_NAME="SYSTEM_NAME服务之(CourseController)";
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private CourseCategoryService courseCategoryService;
 
     /**
      * 查询所有的数据信息
@@ -64,6 +71,21 @@ public class CourseController {
         responseVo.setCode("200").setMessage("操作成功").setContent(courseDto);
         return  responseVo;
     }
+    @ApiOperation(value = "t通过id查询课程的分类")
+
+    @GetMapping("/list-category/{courseId}")
+    public ResponseVo getListCategory(@PathVariable("courseId") String courseId){
+        ResponseVo responseVo = new ResponseVo();
+        log.info("通过课程编号进行查询对应的分类信息{}",courseId);
+        //断言
+        ValidatorUtils.require(courseId,"课程编号");
+        List<CourseCategoryDto> courseCategoryDtoList=courseCategoryService.getListCategory(courseId);
+
+        responseVo.setCode("200").setMessage("操作成功").setContent(courseCategoryDtoList);
+
+        return  responseVo;
+    }
+
 
     /**
      * 通过id编号进行 物理删除
