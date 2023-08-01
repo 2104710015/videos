@@ -11,14 +11,14 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: system
-          uri: http://127.0.0.1:9001  #lb://SYSTEM
+          uri: lb://SYSTEM    #http://127.0.0.1:9001  #
           predicates:
             - Path=/system/**
           filters:
             - SwaggerHeaderFilter
             #- StripPrefix=1
         - id: customer
-          uri: lb://CUSTOMER #http://127.0.0.1:9002
+          uri: http://127.0.0.1:9002 #lb://CUSTOMER #
           predicates:
             - Path=/customer/**
           filters:

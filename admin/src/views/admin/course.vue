@@ -253,16 +253,21 @@
         _this.$refs.pagination.size = 5
         _this.allCategory();
         //调用当前的老师
+
         _this.allTeacher();
-        _this.list(1)//查询所有的课程信息
+        // _this.list(1)//查询所有的课程信息
         },
         methods:{
           list(page){//查询所有课程信息
             let _this = this;
             Loading.show();
+            //查询
+            //传递一个参数
+
             _this.$ajax.post(process.env.VUE_APP_SERVER + "/customer/admin/course/list", {
               page: page,
-              size: _this.$refs.pagination.size
+              size: _this.$refs.pagination.size,
+              data:[_this.teacher.id]
             }).then((res) => {
               console.log("获取到的课程信息",res);
               //进行赋值
@@ -330,13 +335,41 @@
               console.log("获取当前账号对应的教师信息",res);
               if (res.data.boo){
                 _this.teacher=res.data.content;
+                _this.list(1)//查询所有的课程信息
               }else {
                 //没有开通对应的权限的时候进行返回登录界面
                 _this.$router.push("/login");
               }
             })
 
-          }
+          },
+          save(){//添加对应的课程信息
+            let _this = this;
+            //进行前端验证
+            if (1!=1
+            ||!Validator.require(_this.course.name,"课程名称")
+            ||!Validator.length(_this.course.name,"课程名称",1,50)
+                ||!Validator.require(_this.course.summary,"课程描述",1,3000)
+            ){
+              return;
+            }
+            //获取对应的课程选中的分类
+            let categoryNodes = _this.tree.getCheckedNodes();
+            if (Tool.isEmpty(categoryNodes)){
+              prompt.warning("请选择对应的分类信息");
+              return;
+            }
+            //将获得到的分类的信息进行赋值
+            _this.course.categorys=categoryNodes;
+            //调用后台的添加
+            Loading.show();
+            _this.$ajax.post(process.env.VUE_APP_SERVER + "/customer/admin/course/saveAndUpdate",_this.course)
+                .then((res) => {
+                  Loading.hide();
+                  console.log("添加新课程的信息",res);
+
+                })
+          },
         }
     }
 </script>
