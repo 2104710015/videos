@@ -2,7 +2,7 @@ package com.videos.course.server.service;
 
 
 
-import com.videos.course.server.dto.RoleDto;
+import com.videos.course.server.dto.UserStudentDto;
 import com.videos.course.server.dto.PageDto;
 
 import java.util.List;
@@ -13,17 +13,9 @@ import java.util.List;
  * 千里之外定位问题、瞬间修复依旧风骚……
  * @create 2021-04-11 23:24
  */
-public interface RoleService {
+public interface UserStudentService {
     public void getList(PageDto pageDto);
-    public void saveAndUpdate(RoleDto roleDto);
+    public void saveAndUpdate(UserStudentDto userStudentDto);
 
-    public int del(String id);
-
-    List<String> getListResourceByRoleId(String roleId);
-
-    int getSaveResource(RoleDto roleDto);
-
-    List<String> roleAndUserList(String roleId);
-
-    int saveUser(RoleDto roleDto);
+    public void del(String id);
 }

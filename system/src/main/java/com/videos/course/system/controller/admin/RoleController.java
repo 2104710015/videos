@@ -8,6 +8,7 @@ import com.videos.course.server.utils.ValidatorUtils;
 import com.videos.course.server.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -117,6 +118,63 @@ public class RoleController {
     }
 
     /**
+     * 通过角色id查询对应角色的用户信息
+     * @param roleId
+     * @return
+     */
+    @ApiOperation(value = "通过角色id查询对应角色的用户信息")
+    @GetMapping("/roleAndUserList/{roleId}")
+    public ResponseVo getRoleAndUserList(@PathVariable("roleId") String roleId){
+        ResponseVo responseVo = new ResponseVo();
+        log.info("通过角色编号:{},查询对应角色的用户信息",roleId);
+        //进行断言
+        ValidatorUtils.require(roleId,"角色编号");
+
+        List<String> userList=roleService.roleAndUserList(roleId);
+        if (!CollectionUtils.isEmpty(userList)){
+            responseVo
+                    .setCode(String.valueOf(BusinessExceptionEnum.OK_STATUS))
+                    .setMessage(BusinessExceptionEnum.OK_STATUS.getDesc())
+                    .setContent(userList);
+        }else {
+            responseVo
+                    .setBoo(false)
+                    .setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS))
+                    .setMessage(BusinessExceptionEnum.NOT_STATUS.getDesc())
+                    .setContent(userList);
+        }
+        return responseVo;
+    }
+
+    /**
+     * 给某个用户添加对应的角色
+     * @return
+     */
+    @ApiOperation(value = "给某个用户添加对应的角色")
+    @PostMapping("/saveUser")
+    public ResponseVo saveUser(@RequestBody RoleDto roleDto){
+        ResponseVo responseVo = new ResponseVo();
+        log.info("对某个角色,{}、修改对应的用户,{}",roleDto.getRoleId(),roleDto.getUserIds());
+        ValidatorUtils.require(roleDto.getRoleId(),"角色编号");
+//        ValidatorUtils.require(roleDto.getUserIds(),"用户编号");
+        int i=roleService.saveUser(roleDto);
+        if (i>0){
+            responseVo
+                    .setCode(String.valueOf(BusinessExceptionEnum.OK_STATUS))
+                    .setMessage(BusinessExceptionEnum.OK_STATUS.getDesc())
+                    .setContent(roleDto);
+        }else {
+            responseVo
+                    .setBoo(false)
+                    .setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS))
+                    .setMessage(BusinessExceptionEnum.NOT_STATUS.getDesc())
+                    .setContent(roleDto);
+
+        }
+        return  responseVo;
+    }
+
+    /**
      * 通过id编号进行 物理删除
      * @param id  删除的id编号
      * @return   返回共用的json数据vo模版格式
@@ -126,9 +184,15 @@ public class RoleController {
     public ResponseVo del(@PathVariable String id){
         ResponseVo responseVo = new ResponseVo();
         try {
-            roleService.del(id);
-            responseVo.setCode("200").setMessage("操作成功");
-
+            int del = roleService.del(id);
+            if(del>0){
+                responseVo.setCode("200").setMessage("操作成功");
+            }else {
+                responseVo
+                        .setBoo(false)
+                        .setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS.getCode()))
+                        .setMessage(BusinessExceptionEnum.NOT_STATUS.getDesc());
+            }
         }catch (Exception e){
             //操作失败
             responseVo.setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS.getCode())).setMessage(e.getMessage());

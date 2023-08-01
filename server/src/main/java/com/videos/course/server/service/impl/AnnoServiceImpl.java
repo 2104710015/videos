@@ -36,9 +36,7 @@ public class AnnoServiceImpl implements AnnoService {
             //设置排序 为 倒序方式
         AnnoExample annoExample = new AnnoExample();
         List<Anno> annos = annoMapper.selectByExampleWithBLOBs(annoExample);
-        System.out.println(annos);
         PageInfo<Anno> annoPageInfo = new PageInfo<>(annos);
-        System.out.println(annoPageInfo);
         pageDto.setTotal(annoPageInfo.getTotal());
         /**
          * 使用jdk8的stream()进行遍历与拷贝数据
@@ -48,7 +46,7 @@ public class AnnoServiceImpl implements AnnoService {
             BeanUtils.copyProperties(anno, annoDto);
             return annoDto;
         }).collect(Collectors.toList());
-        System.out.println(annoDtoList);
+
         pageDto.setData(annoDtoList);
 
     }

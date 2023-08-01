@@ -42,9 +42,9 @@ export default {
     _this.loadAnnouncements();
   },
   methods: {
-    loadAnnouncements(page) {
+    loadAnnouncements() {
       let _this=this;
-      _this.$ajax.post(process.env.VUE_APP_SERVER+'/system/admin/anno/list',{
+      _this.$ajax.post(process.env.VUE_APP_SERVER+'/customer/admin/anno/list',{
         page:1,
         size:1000
       }) // 发送异步请求获取公告数据（根据实际情况调整API路径）

@@ -2,7 +2,7 @@ package com.videos.course.server.service;
 
 
 
-import com.videos.course.server.dto.StudentDto;
+import com.videos.course.server.dto.UserTeacherDto;
 import com.videos.course.server.dto.PageDto;
 
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
  * 千里之外定位问题、瞬间修复依旧风骚……
  * @create 2021-04-11 23:24
  */
-public interface StudentService {
+public interface UserTeacherService {
     public void getList(PageDto pageDto);
-    public void saveAndUpdate(StudentDto studentDto);
+    public void saveAndUpdate(UserTeacherDto userTeacherDto);
 
     public void del(String id);
 }

@@ -5,9 +5,15 @@ public class Student {
 
     private String name;
 
-    private String adders;
+    private String nickname;
 
-    private Float money;
+    private String image;
+
+    private String sex;
+
+    private String phone;
+
+    private String motto;
 
     public String getId() {
         return id;
@@ -25,20 +31,44 @@ public class Student {
         this.name = name;
     }
 
-    public String getAdders() {
-        return adders;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setAdders(String adders) {
-        this.adders = adders;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public Float getMoney() {
-        return money;
+    public String getImage() {
+        return image;
     }
 
-    public void setMoney(Float money) {
-        this.money = money;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getMotto() {
+        return motto;
+    }
+
+    public void setMotto(String motto) {
+        this.motto = motto;
     }
 
     @Override
@@ -49,8 +79,11 @@ public class Student {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", adders=").append(adders);
-        sb.append(", money=").append(money);
+        sb.append(", nickname=").append(nickname);
+        sb.append(", image=").append(image);
+        sb.append(", sex=").append(sex);
+        sb.append(", phone=").append(phone);
+        sb.append(", motto=").append(motto);
         sb.append("]");
         return sb.toString();
     }

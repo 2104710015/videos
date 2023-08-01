@@ -13,7 +13,7 @@
         <table id="simple-table" class="table  table-bordered table-hover">
             <thead>
             <tr>
-                                    <th>id</th>
+                    <th>id</th>
                     <th>登陆名</th>
                     <th>昵称</th>
                     <th>密码</th>
@@ -184,7 +184,7 @@
             },
             updatePassWord(user){
                 let _this=this;
-                _this.user=$.extend({},user);_this.user
+                _this.user=$.extend({},user);
                 _this.user.password=null;
                 $("#form-modal-password").modal("show");
             },

@@ -377,7 +377,7 @@
                                 v-show="itmes.parent==itme.id" class=""  id="system-user-sidebar">
                                 <router-link :to="{name:itmes.page}" class="dropdown-toggle">
                                     <i class="menu-icon fa fa-caret-right"></i>
-                                      {{itmes.name}}:{{itmes.page}}
+                                      {{itmes.name}}
                                 </router-link>
                                 <b class="arrow"></b>
                             </li>

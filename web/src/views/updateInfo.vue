@@ -22,14 +22,29 @@ export default {
   },
   data () {
     return {
-      timeData:[
-        {"date":"2023-1-1", "list":["新增PDF转WORD功能",'修复上传文件太大导致面面卡死的bug','修复了ppt部分页面不显示的问题','修改了其他已知问题']},
-        {"date":"2023-12-25", "list":["新增线上富文编辑功能",'app端修复了文件上传未限制选择文件类型的bug']},
-        {"date":"2023-12-22", "list":["修改了部分已知bug"]}
-      ]
+      timeData:[],
     }
   },
+  mounted: function () {
+    let _this=this;
+    _this.list();
+  },
   methods: {
+    list(page) {
+      let _this = this;
+      // Loading.show();
+      _this.$ajax.post(process.env.VUE_APP_SERVER + "/customer/admin/updateInfo/list", {
+        page: 1,
+        size: 7
+      }).then((res) => {
+        console.log('获取更新的数据信息', res);
+        if (res.data.boo) {//有结果返回了对应的数据信息，才进行显示并取消加载的图片
+          _this.timeData = res.data.content.data;
+          console.log('res.data.content.data.total', res.data.content.total);
+        }
+      })
+
+    },
   }
 }
 </script>

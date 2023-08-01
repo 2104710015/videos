@@ -36,6 +36,11 @@ public class RoleDto {
     @ApiModelProperty(value = "勾选上的菜单节点id数据")
     private List<String> resourcesIds;
 
+    @ApiModelProperty(value = "角色的编号")
+    private String roleId;
+
+    @ApiModelProperty(value = "修改的用户的编号")
+    private List<String> userIds;
 
 
 
@@ -49,6 +54,9 @@ sb.append("Hash = ").append(hashCode());
     sb.append(", name=").append(name);
     sb.append(", desc=").append(desc);
     sb.append(", resourcesIds=").append(resourcesIds);
+    sb.append(", roleId=").append(roleId);
+    sb.append(", userIds=").append(userIds);
+
 
     sb.append("]");
 return sb.toString();

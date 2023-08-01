@@ -4,6 +4,8 @@ import com.videos.course.server.domin.Category;
 import com.videos.course.server.domin.CategoryExample;
 import com.videos.course.server.dto.CategoryDto;
 import com.videos.course.server.dto.PageDto;
+import com.videos.course.server.enums.BusinessExceptionEnum;
+import com.videos.course.server.exception.ServerVideosException;
 import com.videos.course.server.mapper.CategoryMapper;
 import com.videos.course.server.service.CategoryService;
 import com.videos.course.server.utils.UUIDUtils;
@@ -12,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -63,9 +66,42 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    /**
+     * 当删除以及分类的时候，如果有二级分类，那么一级分类不能删
+     *
+     * @param id
+     */
     @Override
     public void del(String id) {
-        categoryMapper.deleteByPrimaryKey(id);
+        List<Category> categories =selectByIdChildren(id);
+        if (CollectionUtils.isEmpty(categories)){
+            //没有对应的数据的情况下进行删除
+            categoryMapper.deleteByPrimaryKey(id);
+        }else {
+            throw new ServerVideosException(BusinessExceptionEnum.DELETE_NOT_EROOR);
+        }
+
+    }
+    private List<Category> selectByIdChildren(String id){
+        //通过父级id进行查询是否有数据存在
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andParentEqualTo(id);
+        List<Category> categories = categoryMapper.selectByExample(categoryExample);
+        return categories;
+    }
+
+
+    @Override
+    public List<CategoryDto> getAllList() {
+        List<Category> categories = categoryMapper.selectByExample(null);//查询所有数据
+        //进行拷贝对象
+        List<CategoryDto> collect = categories.stream().map(x -> {
+            CategoryDto categoryDto = new CategoryDto();
+            BeanUtils.copyProperties(x, categoryDto);
+            return categoryDto;
+        }).collect(Collectors.toList());
+
+        return collect;
     }
 
     private  void save(Category  category){

@@ -11,7 +11,7 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: system
-          uri: http://127.0.0.1:9001 #lb://SYSTEM
+          uri:  http://127.0.0.1:9001 #lb://SYSTEM
           predicates:
             - Path=/system/**
           filters:

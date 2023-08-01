@@ -164,6 +164,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <table id="user-table" class="table table-hover">
+                                  <thead>
+                                      <tr>
+                                        <th colspan="2">所有的用户信息</th>
+                                      </tr>
+                                  </thead>
                                     <tbody>
                                     <tr v-for="user in users">
                                         <td>{{user.loginName}}</td>
@@ -178,6 +183,11 @@
                             </div>
                             <div class="col-md-6">
                                 <table id="role-user-table" class="table table-hover">
+                                  <thead>
+                                  <tr>
+                                    <th colspan="2">当前角色已有的用户信息</th>
+                                  </tr>
+                                  </thead>
                                     <tbody>
                                     <tr v-for="user in roleUsers">
                                         <td>{{user.loginName}}</td>
@@ -440,14 +450,68 @@
           //获取当前角色和用户关联的用户数据信息
           //进行清空之前的数据信息
           _this.roleUsers=[];
-          _this.$ajax.get(process.env.VUE_APP_SERVER + "/system/admin/role/roleAndUserList/",_this.role.id)
+          _this.$ajax.get(process.env.VUE_APP_SERVER + "/system/admin/role/roleAndUserList/"+_this.role.id)
               .then((res)=>{
                 console.log("查询了用户和角色关联的用户数据信息",res);
-
+                if(res.data.boo){
+                  let userIds=res.data.content;
+                  //需要进行循环遍历
+                  for (let i = 0; i < userIds.length; i++) {
+                    for (let j = 0; j < _this.users.length; j++) {
+                      if (userIds[i]===_this.users[j].id){
+                        _this.roleUsers.push(_this.users[j]);
+                      }
+                    }
+                  }
+                }
               })
+        },
+        //给当前角色添加用户
+        addUser(user){
+          console.log("给某个角色添加用户",user);
+          let _this=this;
+          let users=_this.roleUsers;
+          //调用后台的数据信息
+          for (let i = 0; i < users.length; i++) {
+            if (user===users[i]){
+              return;
+            }
+          }
+          _this.roleUsers.push(user);
+        },
+        /**
+         * 将某个角色关联的用户进行删除
+         * @param user
+         */
+        deleteUser(user){
+          console.log("需要进行删除的用户",user);
+          let _this=this;
+          //进行编写一个删除的事件
+          Tool.removeObj(_this.roleUsers,user);
+        },
+        saveUser(){
+          let _this=this;
+          let users=_this.roleUsers;
 
-
-
+          //只是需要保存用户的编号
+          //进行遍历获取用户的id编号
+          let userIds=[];
+          for (let i = 0; i < users.length; i++) {
+            userIds.push(users[i].id);
+          }
+          console.log("需要进行重新分配的用户的编号",userIds);
+          _this.$ajax.post(process.env.VUE_APP_SERVER + "/system/admin/role/saveUser",{
+            roleId:_this.role.id,
+            userIds:userIds
+          }).then((res)=>{
+            console.log("修改某个角色的用户权限",res);
+            $("#user-modal").modal("hide");
+            if (res.data.boo){
+              prompt.success("数据操作成功")
+            }else {
+              prompt.error("网络异常,请稍后再试");
+            }
+          })
         }
       }
     }

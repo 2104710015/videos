@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.videos.course.server.mapper.StudentMapper">
   <resultMap id="BaseResultMap" type="com.videos.course.server.domin.Student">
-    <result column="id" jdbcType="CHAR" property="id" />
+    <id column="id" jdbcType="CHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="adders" jdbcType="VARCHAR" property="adders" />
-    <result column="money" jdbcType="REAL" property="money" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="motto" jdbcType="VARCHAR" property="motto" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, adders, money
+    id, `name`, nickname, image, sex, phone, motto
   </sql>
   <select id="selectByExample" parameterType="com.videos.course.server.domin.StudentExample" resultMap="BaseResultMap">
     select
@@ -74,7 +77,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from student
+    from studen
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,20 +85,32 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from studen
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from studen
+    where id = #{id,jdbcType=CHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.videos.course.server.domin.StudentExample">
-    delete from student
+    delete from studen
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.videos.course.server.domin.Student">
-    insert into student (id, `name`, adders, 
-      money)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{adders,jdbcType=VARCHAR}, 
-      #{money,jdbcType=REAL})
+    insert into studen (id, `name`, nickname, 
+      image, sex, phone, 
+      motto)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{motto,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.videos.course.server.domin.Student">
-    insert into student
+    insert into studen
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -103,48 +118,75 @@
       <if test="name != null">
         `name`,
       </if>
-      <if test="adders != null">
-        adders,
+      <if test="nickname != null">
+        nickname,
       </if>
-      <if test="money != null">
-        money,
+      <if test="image != null">
+        image,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="motto != null">
+        motto,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=CHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="adders != null">
-        #{adders,jdbcType=VARCHAR},
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="money != null">
-        #{money,jdbcType=REAL},
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="motto != null">
+        #{motto,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.videos.course.server.domin.StudentExample" resultType="java.lang.Long">
-    select count(*) from student
+    select count(*) from studen
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update student
+    update studen
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=CHAR},
       </if>
       <if test="record.name != null">
         `name` = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.adders != null">
-        adders = #{record.adders,jdbcType=VARCHAR},
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.money != null">
-        money = #{record.money,jdbcType=REAL},
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.motto != null">
+        motto = #{record.motto,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -152,13 +194,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update student
-    set id = #{record.id,jdbcType=INTEGER},
+    update studen
+    set id = #{record.id,jdbcType=CHAR},
       `name` = #{record.name,jdbcType=VARCHAR},
-      adders = #{record.adders,jdbcType=VARCHAR},
-      money = #{record.money,jdbcType=REAL}
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      motto = #{record.motto,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.videos.course.server.domin.Student">
+    update studen
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="motto != null">
+        motto = #{motto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.videos.course.server.domin.Student">
+    update studen
+    set `name` = #{name,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      motto = #{motto,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

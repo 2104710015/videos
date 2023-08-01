@@ -52,9 +52,13 @@
     <!--   <table tableName="TestUsers" domainObjectName="TestUsers"/>-->
         <!--<table tableName="chapter" domainObjectName="Chapter"/>-->
 <!--         <table tableName="section" domainObjectName="Section"/>-->
-   <!--     <table tableName="course" domainObjectName="Course"/>-->
-   <!--     <table tableName="category" domainObjectName="Category"/>-->
-<!--        <table tableName="course_category" domainObjectName="CourseCategory"/>-->
+<!--        <table tableName="course" domainObjectName="Course"/>-->
+<!--        <table tableName="category" domainObjectName="Category"/>-->
+<!--        <table tableName="updateinfo" domainObjectName="UpdateInfo"/>-->
+<!--        <table tableName="user_student" domainObjectName="UserStudent"/>-->
+<!--        <table tableName="user_teacher" domainObjectName="UserTeacher"/>-->
+
+        <!--        <table tableName="course_category" domainObjectName="CourseCategory"/>-->
  <!--       <table tableName="course_content" domainObjectName="CourseContent"/>-->
 <!--    <table tableName="course_content_file" domainObjectName="CourseContentFile"/>-->
 <!--        <table tableName="teacher" domainObjectName="Teacher"/>-->
@@ -63,12 +67,11 @@
 <!--         <table tableName="resource" domainObjectName="Resource"/>-->
 <!--         <table tableName="role" domainObjectName="Role"/>-->
 <!--         <table tableName="role_resource" domainObjectName="RoleResource"/>-->
-
 <!--        <table tableName="anno_teacher" domainObjectName="AnnoTeacher"/>-->
-        <table tableName="anno_course" domainObjectName="AnnoCourse"/>
-        <!--        <table tableName="anno" domainObjectName="Anno"/>-->
-<!--        <table tableName="student" domainObjectName="Student"/>-->
-        <!--       <table tableName="role_user" domainObjectName="RoleUser"/>-->
+<!--        <table tableName="anno_course" domainObjectName="AnnoCourse"/>-->
+<!--                <table tableName="anno" domainObjectName="Anno"/>-->
+        <table tableName="studen" domainObjectName="Student"/>
+<!--               <table tableName="role_user" domainObjectName="RoleUser"/>-->
   <!--       <table tableName="member" domainObjectName="Member"/>-->
      <!--    <table tableName="sms" domainObjectName="Sms"/>-->
 <!--         <table tableName="member_course" domainObjectName="MemberCourse"/>-->

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.videos.course.server.mapper.AnnoMapper">
-  <resultMap id="BaseResultMap" type="com.videos.course.server.domin.Anno">
+<mapper namespace="com.videos.course.server.mapper.UpdateInfoMapper">
+  <resultMap id="BaseResultMap" type="com.videos.course.server.domin.UpdateInfo">
     <id column="id" jdbcType="CHAR" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="releasetime" jdbcType="DATE" property="releasetime" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="updatetime" jdbcType="DATE" property="updatetime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.videos.course.server.domin.Anno">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.videos.course.server.domin.UpdateInfo">
+    <result column="updatecontent" jdbcType="LONGVARCHAR" property="updatecontent" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,12 +67,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, releasetime, `status`
+    id, updatetime
   </sql>
   <sql id="Blob_Column_List">
-    content
+    updatecontent
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.videos.course.server.domin.AnnoExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.videos.course.server.domin.UpdateInfoExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -82,7 +80,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from anno
+    from updateinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,13 +88,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.videos.course.server.domin.AnnoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.videos.course.server.domin.UpdateInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from anno
+    from updateinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -109,85 +107,67 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from anno
+    from updateinfo
     where id = #{id,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from anno
+    delete from updateinfo
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.videos.course.server.domin.AnnoExample">
-    delete from anno
+  <delete id="deleteByExample" parameterType="com.videos.course.server.domin.UpdateInfoExample">
+    delete from updateinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.videos.course.server.domin.Anno">
-    insert into anno (id, title, releasetime, 
-      `status`, content)
-    values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{releasetime,jdbcType=DATE}, 
-      #{status,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.videos.course.server.domin.UpdateInfo">
+    insert into updateinfo (id, updatetime, updatecontent
+      )
+    values (#{id,jdbcType=CHAR}, #{updatetime,jdbcType=DATE}, #{updatecontent,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.videos.course.server.domin.Anno">
-    insert into anno
+  <insert id="insertSelective" parameterType="com.videos.course.server.domin.UpdateInfo">
+    insert into updateinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="title != null">
-        title,
+      <if test="updatetime != null">
+        updatetime,
       </if>
-      <if test="releasetime != null">
-        releasetime,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="content != null">
-        content,
+      <if test="updatecontent != null">
+        updatecontent,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=CHAR},
       </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=DATE},
       </if>
-      <if test="releasetime != null">
-        #{releasetime,jdbcType=DATE},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
+      <if test="updatecontent != null">
+        #{updatecontent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.videos.course.server.domin.AnnoExample" resultType="java.lang.Long">
-    select count(*) from anno
+  <select id="countByExample" parameterType="com.videos.course.server.domin.UpdateInfoExample" resultType="java.lang.Long">
+    select count(*) from updateinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update anno
+    update updateinfo
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=CHAR},
       </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=DATE},
       </if>
-      <if test="record.releasetime != null">
-        releasetime = #{record.releasetime,jdbcType=DATE},
-      </if>
-      <if test="record.status != null">
-        `status` = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
+      <if test="record.updatecontent != null">
+        updatecontent = #{record.updatecontent,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -195,57 +175,43 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update anno
+    update updateinfo
     set id = #{record.id,jdbcType=CHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      releasetime = #{record.releasetime,jdbcType=DATE},
-      `status` = #{record.status,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=LONGVARCHAR}
+      updatetime = #{record.updatetime,jdbcType=DATE},
+      updatecontent = #{record.updatecontent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update anno
+    update updateinfo
     set id = #{record.id,jdbcType=CHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      releasetime = #{record.releasetime,jdbcType=DATE},
-      `status` = #{record.status,jdbcType=VARCHAR}
+      updatetime = #{record.updatetime,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.videos.course.server.domin.Anno">
-    update anno
+  <update id="updateByPrimaryKeySelective" parameterType="com.videos.course.server.domin.UpdateInfo">
+    update updateinfo
     <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=DATE},
       </if>
-      <if test="releasetime != null">
-        releasetime = #{releasetime,jdbcType=DATE},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
+      <if test="updatecontent != null">
+        updatecontent = #{updatecontent,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.videos.course.server.domin.Anno">
-    update anno
-    set title = #{title,jdbcType=VARCHAR},
-      releasetime = #{releasetime,jdbcType=DATE},
-      `status` = #{status,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR}
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.videos.course.server.domin.UpdateInfo">
+    update updateinfo
+    set updatetime = #{updatetime,jdbcType=DATE},
+      updatecontent = #{updatecontent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.videos.course.server.domin.Anno">
-    update anno
-    set title = #{title,jdbcType=VARCHAR},
-      releasetime = #{releasetime,jdbcType=DATE},
-      `status` = #{status,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.videos.course.server.domin.UpdateInfo">
+    update updateinfo
+    set updatetime = #{updatetime,jdbcType=DATE}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

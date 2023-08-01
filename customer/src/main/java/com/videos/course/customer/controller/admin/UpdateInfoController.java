@@ -1,8 +1,8 @@
-package com.videos.course.system.controller.admin;
+package com.videos.course.customer.controller.admin;
 
-import com.videos.course.server.dto.StudentDto;
+import com.videos.course.server.dto.UpdateInfoDto;
 import com.videos.course.server.dto.PageDto;
-import com.videos.course.server.service.StudentService;
+import com.videos.course.server.service.UpdateInfoService;
 import com.videos.course.server.utils.ValidatorUtils;
 import com.videos.course.server.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
@@ -17,15 +17,15 @@ import io.swagger.annotations.ApiOperation;
  * 千里之外定位问题、瞬间修复依旧风骚……
  * @create 2021-04-11 18:07
  */
-@Api(tags = "Student模块")
+@Api(tags = "UpdateInfo模块")
 @RestController
-@RequestMapping("/admin/student")
+@RequestMapping("/admin/updateInfo")
 @Slf4j
-public class StudentController {
+public class UpdateInfoController {
         //输出日志的服务名称
-     public static final String BUSINESS_NAME="SYSTEM_NAME服务之(StudentController)";
+     public static final String BUSINESS_NAME="CUSTOMER_NAME服务之(UpdateInfoController)";
     @Autowired
-    private StudentService studentService;
+    private UpdateInfoService updateInfoService;
 
     /**
      * 查询所有的数据信息
@@ -35,7 +35,7 @@ public class StudentController {
     @ApiOperation(value = "查询所有的数据信息")
     @PostMapping("/list")
     public ResponseVo getList(@RequestBody PageDto pageDto){
-        studentService.getList(pageDto);
+        updateInfoService.getList(pageDto);
 
        ResponseVo responseVo = new ResponseVo();
        responseVo.setCode("200").setMessage("查询成功").setContent(pageDto);
@@ -44,26 +44,20 @@ public class StudentController {
 
     /**
      * 添加和修改的共用类
-     * @param studentDto  添加与修改的dto实体类
+     * @param updateInfoDto  添加与修改的dto实体类
      * @return   返回共用的json数据vo模版格式
      */
     @ApiOperation(value = "添加和修改的共用类")
     @PostMapping("/saveAndUpdate")
-    public ResponseVo saveAndUpdate(@RequestBody StudentDto studentDto){
+    public ResponseVo saveAndUpdate(@RequestBody UpdateInfoDto updateInfoDto){
         /**
          * 进行数据的长度和非空验证
          */
 
-            ValidatorUtils.length(studentDto.getName(), "学生名字", 1, 50);
-            ValidatorUtils.length(studentDto.getNickname(), "学生昵称", 1, 50);
-            ValidatorUtils.length(studentDto.getImage(), "头像", 1, 100);
-            ValidatorUtils.length(studentDto.getSex(), "性别", 1, 10);
-            ValidatorUtils.length(studentDto.getEmail(), "邮箱", 1, 40);
-            ValidatorUtils.length(studentDto.getPhone(), "手机号", 1, 11);
 
-        studentService.saveAndUpdate(studentDto);
+        updateInfoService.saveAndUpdate(updateInfoDto);
         ResponseVo responseVo = new ResponseVo();
-        responseVo.setCode("200").setMessage("操作成功").setContent(studentDto);
+        responseVo.setCode("200").setMessage("操作成功").setContent(updateInfoDto);
         return  responseVo;
     }
 
@@ -77,7 +71,7 @@ public class StudentController {
     public ResponseVo del(@PathVariable String id){
 
 
-        studentService.del(id);
+        updateInfoService.del(id);
         ResponseVo responseVo = new ResponseVo();
         responseVo.setCode("200").setMessage("操作成功");
         return  responseVo;

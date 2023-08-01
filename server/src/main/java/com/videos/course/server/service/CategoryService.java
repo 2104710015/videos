@@ -18,4 +18,6 @@ public interface CategoryService {
     public void saveAndUpdate(CategoryDto categoryDto);
 
     public void del(String id);
+
+    List<CategoryDto> getAllList();
 }

@@ -3,10 +3,10 @@
     <div v-for="(item,index) in timeData" :key="index">
       <div class="flex flex-center-cz">
         <div class="time-dot"></div>
-        <div class="margin-left-m ">{{item.date}}</div>
+        <div class="margin-left-m ">{{item.updatetime}}</div>
       </div>
       <div class="flex flex-col padding-m time-item" >
-        <div v-for="detail in item.list">{{detail}}</div>
+        <div>{{item.updatecontent}}</div>
       </div>
     </div>
   </div>

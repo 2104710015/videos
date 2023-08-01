@@ -105,9 +105,9 @@ public class UserController {
         return  responseVo;
     }
 
-//    public static void main(String[] args) {
-//        System.out.println("DigestUtils.md5DigestAsHex(\"test\".getBytes()) = " + DigestUtils.md5DigestAsHex("d242b1384ce5fdf0285b2796347c50d2".getBytes()));
-//    }
+    public static void main(String[] args) {
+        System.out.println("DigestUtils.md5DigestAsHex(\"test\".getBytes()) = " + DigestUtils.md5DigestAsHex("77dde811af4c966d2183bf958c5bf5bf".getBytes()));
+    }
 
     @ApiOperation(value = "账号的退出")
     @GetMapping("/logout/{token}")
@@ -188,14 +188,15 @@ public class UserController {
     @ApiOperation(value = "通过id编号进行 物理删除")
     @RequestMapping("/del/{id}")
     public ResponseVo del(@PathVariable String id){
-
-
-        userService.del(id);
         ResponseVo responseVo = new ResponseVo();
-        responseVo.setCode("200").setMessage("操作成功");
+        try{
+            userService.del(id);
+            responseVo.setCode("200").setMessage("操作成功");
+        }catch (Exception e){
+            //操作失败
+            responseVo.setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS.getCode())).setMessage(e.getMessage());
+        }
         return  responseVo;
     }
-
-
 
 }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.videos.course.server.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.videos.course.server.domin.User">
-    <result column="id" jdbcType="CHAR" property="id" />
-    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="CHAR" property="password" />
+<mapper namespace="com.videos.course.server.mapper.UserStudentMapper">
+  <resultMap id="BaseResultMap" type="com.videos.course.server.domin.UserStudent">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="userid" jdbcType="CHAR" property="userid" />
+    <result column="studentid" jdbcType="CHAR" property="studentid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_name, `name`, `password`
+    id, userid, studentid
   </sql>
-  <select id="selectByExample" parameterType="com.videos.course.server.domin.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.videos.course.server.domin.UserStudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from user_student
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,77 +81,68 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.videos.course.server.domin.UserExample">
-    delete from user
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_student
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_student
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.videos.course.server.domin.UserStudentExample">
+    delete from user_student
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <delete id="deleteByPrimaryKey">
-    delete from user
-     <where>
-        <if test="id !=null and  id !=''">
-          id =#{id}
-        </if>
-     </where>
-</delete>
-  <insert id="insert" parameterType="com.videos.course.server.domin.User">
-    insert into user (id, login_name, `name`, 
-      `password`)
-    values (#{id,jdbcType=CHAR}, #{loginName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{password,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.videos.course.server.domin.UserStudent">
+    insert into user_student (id, userid, studentid)
+    values (#{id,jdbcType=CHAR}, #{userid,jdbcType=CHAR}, #{studentid,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.videos.course.server.domin.User">
-    insert into user
+  <insert id="insertSelective" parameterType="com.videos.course.server.domin.UserStudent">
+    insert into user_student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="loginName != null">
-        login_name,
+      <if test="userid != null">
+        userid,
       </if>
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="password != null">
-        `password`,
+      <if test="studentid != null">
+        studentid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=CHAR},
       </if>
-      <if test="loginName != null">
-        #{loginName,jdbcType=VARCHAR},
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=CHAR},
+      <if test="studentid != null">
+        #{studentid,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.videos.course.server.domin.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.videos.course.server.domin.UserStudentExample" resultType="java.lang.Long">
+    select count(*) from user_student
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update user_student
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=CHAR},
       </if>
-      <if test="record.loginName != null">
-        login_name = #{record.loginName,jdbcType=VARCHAR},
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=CHAR},
       </if>
-      <if test="record.name != null">
-        `name` = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
-        `password` = #{record.password,jdbcType=CHAR},
+      <if test="record.studentid != null">
+        studentid = #{record.studentid,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -160,20 +150,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update user_student
     set id = #{record.id,jdbcType=CHAR},
-      login_name = #{record.loginName,jdbcType=VARCHAR},
-      `name` = #{record.name,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=CHAR}
+      userid = #{record.userid,jdbcType=CHAR},
+      studentid = #{record.studentid,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKey">
-    update user
-    set login_name = #{loginName,jdbcType=VARCHAR},
-        `name` = #{name,jdbcType=VARCHAR},
-        `password` = #{password,jdbcType=CHAR}
+  <update id="updateByPrimaryKeySelective" parameterType="com.videos.course.server.domin.UserStudent">
+    update user_student
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="studentid != null">
+        studentid = #{studentid,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.videos.course.server.domin.UserStudent">
+    update user_student
+    set userid = #{userid,jdbcType=CHAR},
+      studentid = #{studentid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

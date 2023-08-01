@@ -8,6 +8,7 @@ import Student from './views/admin/student'
 import Category from './views/admin/category'
 import Role from './views/admin/role'
 import Teacher from "./views/admin/teacher"
+import Course from "@/views/admin/course";
 import Anno from "@/views/admin/anno";
 import UpdateInfo from "@/views/admin/updateInfo";
 
@@ -71,6 +72,11 @@ export default new VueRouter({
                 path:"system/updateInfo",
                 name:"system/updateInfo",
                 component: UpdateInfo,
+            },
+            {
+                path:"system/course",
+                name:"system/course",
+                component: Course,
             },
            ]
     }

@@ -12,38 +12,26 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain=true)
-@ApiModel(value = "Anno模块")
-public class AnnoDto {
+@ApiModel(value = "UpdateInfo模块")
+public class UpdateInfoDto {
 
     /**
-    * id
+    * 更新id
     */
-    @ApiModelProperty(value = " id")
+    @ApiModelProperty(value = " 更新id")
     private String id;
 
     /**
-    * 标题
+    * 更新时间
     */
-    @ApiModelProperty(value = " 标题")
-    private String title;
+    @ApiModelProperty(value = " 更新时间")
+    private LocalDate updatetime;
 
     /**
-    * 内容
+    * 更新内容
     */
-    @ApiModelProperty(value = " 内容")
-    private String content;
-
-    /**
-    * 发布时间
-    */
-    @ApiModelProperty(value = " 发布时间")
-    private LocalDate releasetime;
-
-    /**
-    * 状态
-    */
-    @ApiModelProperty(value = " 状态")
-    private String status;
+    @ApiModelProperty(value = " 更新内容")
+    private String updatecontent;
 
 
 @Override
@@ -53,10 +41,8 @@ sb.append(getClass().getSimpleName());
 sb.append(" [");
 sb.append("Hash = ").append(hashCode());
     sb.append(", id=").append(id);
-    sb.append(", title=").append(title);
-    sb.append(", content=").append(content);
-    sb.append(", releasetime=").append(releasetime);
-    sb.append(", status=").append(status);
+    sb.append(", updatetime=").append(updatetime);
+    sb.append(", updatecontent=").append(updatecontent);
 sb.append("]");
 return sb.toString();
 }

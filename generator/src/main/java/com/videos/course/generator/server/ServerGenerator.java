@@ -22,7 +22,7 @@ import java.util.Set;
  */
 public class ServerGenerator {
     //写入生成模块地址 - Service层 .system com\videos\course\server\\impl
-    static   String MODEL="system";
+    static   String MODEL="customer";
     static  String  toServiceImplPath="server/src/main/java/com/videos/course/server/service/impl/";
     static  String  toServicePath="server/src/main/java/com/videos/course/server/service/";
     static  String  toDtoPath="server/src/main/java/com/videos/course/server/dto/";

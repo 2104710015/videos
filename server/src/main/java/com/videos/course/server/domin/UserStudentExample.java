@@ -1,17 +1,16 @@
 package com.videos.course.server.domin;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnoExample {
+public class UserStudentExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AnnoExample() {
+    public UserStudentExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -175,203 +174,143 @@ public class AnnoExample {
             return (Criteria) this;
         }
 
-        public Criteria andTitleIsNull() {
-            addCriterion("title is null");
+        public Criteria andUseridIsNull() {
+            addCriterion("userid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTitleIsNotNull() {
-            addCriterion("title is not null");
+        public Criteria andUseridIsNotNull() {
+            addCriterion("userid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTitleEqualTo(String value) {
-            addCriterion("title =", value, "title");
+        public Criteria andUseridEqualTo(String value) {
+            addCriterion("userid =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotEqualTo(String value) {
-            addCriterion("title <>", value, "title");
+        public Criteria andUseridNotEqualTo(String value) {
+            addCriterion("userid <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleGreaterThan(String value) {
-            addCriterion("title >", value, "title");
+        public Criteria andUseridGreaterThan(String value) {
+            addCriterion("userid >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("title >=", value, "title");
+        public Criteria andUseridGreaterThanOrEqualTo(String value) {
+            addCriterion("userid >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleLessThan(String value) {
-            addCriterion("title <", value, "title");
+        public Criteria andUseridLessThan(String value) {
+            addCriterion("userid <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleLessThanOrEqualTo(String value) {
-            addCriterion("title <=", value, "title");
+        public Criteria andUseridLessThanOrEqualTo(String value) {
+            addCriterion("userid <=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleLike(String value) {
-            addCriterion("title like", value, "title");
+        public Criteria andUseridLike(String value) {
+            addCriterion("userid like", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotLike(String value) {
-            addCriterion("title not like", value, "title");
+        public Criteria andUseridNotLike(String value) {
+            addCriterion("userid not like", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleIn(List<String> values) {
-            addCriterion("title in", values, "title");
+        public Criteria andUseridIn(List<String> values) {
+            addCriterion("userid in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotIn(List<String> values) {
-            addCriterion("title not in", values, "title");
+        public Criteria andUseridNotIn(List<String> values) {
+            addCriterion("userid not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleBetween(String value1, String value2) {
-            addCriterion("title between", value1, value2, "title");
+        public Criteria andUseridBetween(String value1, String value2) {
+            addCriterion("userid between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTitleNotBetween(String value1, String value2) {
-            addCriterion("title not between", value1, value2, "title");
+        public Criteria andUseridNotBetween(String value1, String value2) {
+            addCriterion("userid not between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeIsNull() {
-            addCriterion("releasetime is null");
+        public Criteria andStudentidIsNull() {
+            addCriterion("studentid is null");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeIsNotNull() {
-            addCriterion("releasetime is not null");
+        public Criteria andStudentidIsNotNull() {
+            addCriterion("studentid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeEqualTo(LocalDate value) {
-            addCriterion("releasetime =", value, "releasetime");
+        public Criteria andStudentidEqualTo(String value) {
+            addCriterion("studentid =", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeNotEqualTo(LocalDate value) {
-            addCriterion("releasetime <>", value, "releasetime");
+        public Criteria andStudentidNotEqualTo(String value) {
+            addCriterion("studentid <>", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeGreaterThan(LocalDate value) {
-            addCriterion("releasetime >", value, "releasetime");
+        public Criteria andStudentidGreaterThan(String value) {
+            addCriterion("studentid >", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeGreaterThanOrEqualTo(LocalDate value) {
-            addCriterion("releasetime >=", value, "releasetime");
+        public Criteria andStudentidGreaterThanOrEqualTo(String value) {
+            addCriterion("studentid >=", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeLessThan(LocalDate value) {
-            addCriterion("releasetime <", value, "releasetime");
+        public Criteria andStudentidLessThan(String value) {
+            addCriterion("studentid <", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeLessThanOrEqualTo(LocalDate value) {
-            addCriterion("releasetime <=", value, "releasetime");
+        public Criteria andStudentidLessThanOrEqualTo(String value) {
+            addCriterion("studentid <=", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeIn(List<LocalDate> values) {
-            addCriterion("releasetime in", values, "releasetime");
+        public Criteria andStudentidLike(String value) {
+            addCriterion("studentid like", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeNotIn(List<LocalDate> values) {
-            addCriterion("releasetime not in", values, "releasetime");
+        public Criteria andStudentidNotLike(String value) {
+            addCriterion("studentid not like", value, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeBetween(LocalDate value1, LocalDate value2) {
-            addCriterion("releasetime between", value1, value2, "releasetime");
+        public Criteria andStudentidIn(List<String> values) {
+            addCriterion("studentid in", values, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andReleasetimeNotBetween(LocalDate value1, LocalDate value2) {
-            addCriterion("releasetime not between", value1, value2, "releasetime");
+        public Criteria andStudentidNotIn(List<String> values) {
+            addCriterion("studentid not in", values, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("`status` is null");
+        public Criteria andStudentidBetween(String value1, String value2) {
+            addCriterion("studentid between", value1, value2, "studentid");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("`status` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusEqualTo(String value) {
-            addCriterion("`status` =", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotEqualTo(String value) {
-            addCriterion("`status` <>", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThan(String value) {
-            addCriterion("`status` >", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThanOrEqualTo(String value) {
-            addCriterion("`status` >=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThan(String value) {
-            addCriterion("`status` <", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThanOrEqualTo(String value) {
-            addCriterion("`status` <=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLike(String value) {
-            addCriterion("`status` like", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotLike(String value) {
-            addCriterion("`status` not like", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIn(List<String> values) {
-            addCriterion("`status` in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotIn(List<String> values) {
-            addCriterion("`status` not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(String value1, String value2) {
-            addCriterion("`status` between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(String value1, String value2) {
-            addCriterion("`status` not between", value1, value2, "status");
+        public Criteria andStudentidNotBetween(String value1, String value2) {
+            addCriterion("studentid not between", value1, value2, "studentid");
             return (Criteria) this;
         }
     }

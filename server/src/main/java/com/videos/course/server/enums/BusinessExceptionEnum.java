@@ -25,6 +25,8 @@ public enum  BusinessExceptionEnum {
     KAPTCHA_NOT_EXIST(5001,"验证码获取失败"),
     KAPTCHA_NOT_LOSE(5002,"验证码过期"),
     KAPTCHA_NOT_EROOR(5003,"验证码错误"),
+    DELETE_NOT_EROOR(5004,"当前操作有2级菜单未删除"),
+
     ;
     private  Integer   code;
     private  String    desc;

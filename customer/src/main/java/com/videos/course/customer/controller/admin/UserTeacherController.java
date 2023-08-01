@@ -1,8 +1,8 @@
-package com.videos.course.system.controller.admin;
+package com.videos.course.customer.controller.admin;
 
-import com.videos.course.server.dto.AnnoDto;
+import com.videos.course.server.dto.UserTeacherDto;
 import com.videos.course.server.dto.PageDto;
-import com.videos.course.server.service.AnnoService;
+import com.videos.course.server.service.UserTeacherService;
 import com.videos.course.server.utils.ValidatorUtils;
 import com.videos.course.server.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
@@ -17,15 +17,15 @@ import io.swagger.annotations.ApiOperation;
  * 千里之外定位问题、瞬间修复依旧风骚……
  * @create 2021-04-11 18:07
  */
-@Api(tags = "Anno模块")
+@Api(tags = "UserTeacher模块")
 @RestController
-@RequestMapping("/admin/anno")
+@RequestMapping("/admin/userTeacher")
 @Slf4j
-public class AnnoController {
+public class UserTeacherController {
         //输出日志的服务名称
-     public static final String BUSINESS_NAME="SYSTEM_NAME服务之(AnnoController)";
+     public static final String BUSINESS_NAME="CUSTOMER_NAME服务之(UserTeacherController)";
     @Autowired
-    private AnnoService annoService;
+    private UserTeacherService userTeacherService;
 
     /**
      * 查询所有的数据信息
@@ -35,7 +35,7 @@ public class AnnoController {
     @ApiOperation(value = "查询所有的数据信息")
     @PostMapping("/list")
     public ResponseVo getList(@RequestBody PageDto pageDto){
-        annoService.getList(pageDto);
+        userTeacherService.getList(pageDto);
 
        ResponseVo responseVo = new ResponseVo();
        responseVo.setCode("200").setMessage("查询成功").setContent(pageDto);
@@ -44,22 +44,20 @@ public class AnnoController {
 
     /**
      * 添加和修改的共用类
-     * @param annoDto  添加与修改的dto实体类
+     * @param userTeacherDto  添加与修改的dto实体类
      * @return   返回共用的json数据vo模版格式
      */
     @ApiOperation(value = "添加和修改的共用类")
     @PostMapping("/saveAndUpdate")
-    public ResponseVo saveAndUpdate(@RequestBody AnnoDto annoDto){
+    public ResponseVo saveAndUpdate(@RequestBody UserTeacherDto userTeacherDto){
         /**
          * 进行数据的长度和非空验证
          */
 
-            ValidatorUtils.length(annoDto.getTitle(), "标题", 1, 100);
-            ValidatorUtils.length(annoDto.getStatus(), "状态", 1, 20);
 
-        annoService.saveAndUpdate(annoDto);
+        userTeacherService.saveAndUpdate(userTeacherDto);
         ResponseVo responseVo = new ResponseVo();
-        responseVo.setCode("200").setMessage("操作成功").setContent(annoDto);
+        responseVo.setCode("200").setMessage("操作成功").setContent(userTeacherDto);
         return  responseVo;
     }
 
@@ -73,7 +71,7 @@ public class AnnoController {
     public ResponseVo del(@PathVariable String id){
 
 
-        annoService.del(id);
+        userTeacherService.del(id);
         ResponseVo responseVo = new ResponseVo();
         responseVo.setCode("200").setMessage("操作成功");
         return  responseVo;

@@ -1,9 +1,7 @@
 package com.videos.course.server.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.videos.course.server.domin.Resource;
-import com.videos.course.server.domin.User;
-import com.videos.course.server.domin.UserExample;
+import com.videos.course.server.domin.*;
 import com.videos.course.server.dto.LoginUsersDto;
 import com.videos.course.server.dto.ResourceDto;
 import com.videos.course.server.dto.UserDto;
@@ -12,6 +10,7 @@ import com.videos.course.server.enums.BusinessExceptionEnum;
 import com.videos.course.server.exception.ServerVideosException;
 import com.videos.course.server.exception.ValidatorException;
 import com.videos.course.server.mapper.ResourceMapper;
+import com.videos.course.server.mapper.RoleUserMapper;
 import com.videos.course.server.mapper.UserMapper;
 import com.videos.course.server.service.UserService;
 import com.videos.course.server.utils.CopyUtils;
@@ -46,6 +45,10 @@ public class UserServiceImpl implements UserService {//alt +回车
 
     @Autowired
     private ResourceMapper  resourceMapper;
+
+
+    @Autowired
+    private RoleUserMapper roleUserMapper;
     @Override
     public  void getList(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
@@ -80,7 +83,18 @@ public class UserServiceImpl implements UserService {//alt +回车
 
     @Override
     public void del(String id) {
-        userMapper.deleteByPrimaryKey(id);
+
+        int i = userMapper.deleteByPrimaryKey(id);
+        if (i<0){
+            throw new ServerVideosException(BusinessExceptionEnum.NOT_STATUS);
+        }else {
+            RoleUserExample roleUserExample = new RoleUserExample();
+            roleUserExample.createCriteria().andUserIdEqualTo(id);
+            List<RoleUser> roleUsers = roleUserMapper.selectByExample(roleUserExample);
+            if (!CollectionUtils.isEmpty(roleUsers)){
+                roleUserMapper.deleteByExample(roleUserExample);
+            }
+        }
     }
 
     @Override
