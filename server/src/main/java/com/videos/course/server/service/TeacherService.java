@@ -2,6 +2,7 @@ package com.videos.course.server.service;
 
 
 
+import com.videos.course.server.domin.Teacher;
 import com.videos.course.server.dto.TeacherDto;
 import com.videos.course.server.dto.PageDto;
 
@@ -20,4 +21,9 @@ public interface TeacherService {
     public void del(String id);
 
     TeacherDto getByUsersId(String id);
+
+    TeacherDto getSelectById(String teacherId);
+
+    void saveUser(TeacherDto teacherDto);
+
 }

@@ -1,5 +1,7 @@
 package com.videos.course.server.service.impl;
 
+import com.videos.course.server.domin.RoleUser;
+import com.videos.course.server.domin.RoleUserExample;
 import com.videos.course.server.domin.Teacher;
 import com.videos.course.server.domin.TeacherExample;
 import com.videos.course.server.dto.TeacherDto;
@@ -13,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -73,6 +76,20 @@ public class TeacherServiceImpl implements TeacherService {
         Teacher teacher = teacherMapper.selectByUsersId(id);
         TeacherDto copy = CopyUtils.copy(teacher, TeacherDto.class);
         return copy;
+    }
+
+    @Override
+    public TeacherDto getSelectById(String teacherId) {
+        Teacher teacher = teacherMapper.selectByPrimaryKey(teacherId);
+        TeacherDto copy = CopyUtils.copy(teacher, TeacherDto.class);
+        return copy;
+    }
+
+    @Override
+    public void saveUser(TeacherDto teacherDto) {
+        Teacher teacher = new Teacher();
+        BeanUtils.copyProperties(teacherDto, teacher);
+        update(teacher);
     }
 
     private  void save(Teacher  teacher){

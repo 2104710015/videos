@@ -4,6 +4,7 @@ import com.videos.course.server.domin.Course;
 import com.videos.course.server.domin.CourseExample;
 import com.videos.course.server.dto.CourseDto;
 import com.videos.course.server.dto.PageDto;
+import com.videos.course.server.dto.SortDto;
 import com.videos.course.server.mapper.CourseCategoryMapper;
 import com.videos.course.server.mapper.CourseMapper;
 import com.videos.course.server.service.CourseCategoryService;
@@ -90,6 +91,24 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void del(String id) {
         courseMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional
+    public int updateSort(SortDto sortDto) {
+        Course course = new Course();
+        course.setId(sortDto.getId());
+        course.setSort(sortDto.getNewSort());
+        //进行修改当前的排序
+        int i=courseMapper.updateSortById(course);
+        //如果排序的值变化比较大的情况
+        if (sortDto.getNewSort()>sortDto.getOldSort()){
+            courseMapper.updateSortForWord(sortDto);
+        }
+        if (sortDto.getNewSort()<sortDto.getOldSort()){
+            courseMapper.updateSortBack(sortDto);
+        }
+        return i;
     }
 
     private  void save(Course  course){

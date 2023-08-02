@@ -9,14 +9,14 @@
                             <router-link to="/welcome">首页</router-link>
                         </li>
                         <li>
-                            <router-link  to="/business/course">{{course.name}}</router-link>
+                            <router-link  to="/system/course">{{course.name}}</router-link>
                         </li>
                     </ul><!-- /.breadcrumb -->
                 </div>
             </div>
         </div><!-- /.main-content -->
         <p>
-            <router-link to="/business/course" class="btn btn-lg  btn-info">
+            <router-link to="/system/course" class="btn btn-lg  btn-info">
                 <i class="ace-icon fa fa-arrow-left"></i>
             </router-link>
                 &nbsp;
@@ -165,13 +165,13 @@
              _this.$refs.pagination.size=5;
              let course = SessionStorage.get(SESSION_KEY_COURSE) || {};//// 课程管理页面点击章管理时，保存课程信息
              console.log(course)
-            if (Tool.isEmpty(course)) {
-                _this.$router.push("/welcome");
-            }
+            // if (Tool.isEmpty(course)) {
+            //     _this.$router.push("/welcome");
+            // }
             _this.course = course;
-            _this.list(1);
-            //激活样式，跳转方法一
-            this.$parent.activeSidebar('business-chapter-sidebar');
+            // _this.list(1);
+            // //激活样式，跳转方法一
+            // this.$parent.activeSidebar('business-chapter-sidebar');
         },
         methods:{
            

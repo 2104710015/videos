@@ -3,6 +3,8 @@ package com.videos.course.server.mapper;
 import com.videos.course.server.domin.Course;
 import com.videos.course.server.domin.CourseExample;
 import java.util.List;
+
+import com.videos.course.server.dto.SortDto;
 import org.apache.ibatis.annotations.Param;
 
 public interface CourseMapper {
@@ -27,4 +29,10 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    int updateSortById(Course course);
+
+    int updateSortForWord(SortDto sortDto);
+
+    int updateSortBack(SortDto sortDto);
 }

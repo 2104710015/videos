@@ -1,5 +1,6 @@
 package com.videos.course.customer.controller.admin;
 
+import com.videos.course.server.domin.Teacher;
 import com.videos.course.server.dto.TeacherDto;
 import com.videos.course.server.dto.PageDto;
 import com.videos.course.server.enums.BusinessExceptionEnum;
@@ -44,13 +45,46 @@ public class TeacherController {
         return  responseVo;
     }
 
+    @ApiOperation(value = "通过教师id查询用户id")
+    @GetMapping("/selectById/{teacherId}")
+    public ResponseVo getSelectById(@PathVariable("teacherId") String teacherId){
+        ResponseVo responseVo = new ResponseVo();
+        TeacherDto teacherDto=teacherService.getSelectById(teacherId);
+        String userid=teacherDto.getUserid();
+        if (userid!=null){
+            responseVo
+                    .setCode(String.valueOf(BusinessExceptionEnum.OK_STATUS))
+                    .setMessage(BusinessExceptionEnum.OK_STATUS.getDesc())
+                    .setContent(userid);
+        }else {
+            responseVo
+                    .setBoo(false)
+                    .setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS))
+                    .setMessage(BusinessExceptionEnum.NOT_STATUS.getDesc());
+        }
+        return  responseVo;
+    }
 
-    @ApiOperation(value = "通过用户id查询所有的数据信息")
+    @ApiOperation(value = "给某个讲师添加或修改对应的用户")
+    @PostMapping("/saveUser")
+    public ResponseVo getSaveUser(@RequestBody TeacherDto teacherDto){
+        ResponseVo responseVo = new ResponseVo();
+        log.info("对某个讲师,{}修改对应的用户,{}",teacherDto.getId(),teacherDto.getUserid());
+        ValidatorUtils.require(teacherDto.getId(),"讲师编号");
+        teacherService.saveUser(teacherDto);
+        responseVo
+                .setCode(String.valueOf(BusinessExceptionEnum.OK_STATUS))
+                .setMessage(BusinessExceptionEnum.OK_STATUS.getDesc());
+
+        return  responseVo;
+    }
+
+    @ApiOperation(value = "通过教师id查询所有的用户数据信息")
     @GetMapping("/getByUsersId/{id}")
     public ResponseVo getByUsersId(@PathVariable("id") String id){
         ResponseVo responseVo = new ResponseVo();
         //进行断言
-        ValidatorUtils.require(id,"用户编号");
+        ValidatorUtils.require(id,"教师编号");
         TeacherDto teacherDto=teacherService.getByUsersId(id);
         if (teacherDto!=null){
             responseVo

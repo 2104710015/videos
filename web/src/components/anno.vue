@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="announcement" v-for="(announcement, index) in announcements" :key="index">
-      <li @click="showPopup(index)">{{ announcement.title }}</li>
+      <li v-show="announcement.status=='审核通过'" @click="showPopup(index)">{{ announcement.title }}</li>
     </div>
 
     <div class="popup-overlay" v-if="showPopupFlag">

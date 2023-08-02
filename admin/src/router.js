@@ -11,6 +11,7 @@ import Teacher from "./views/admin/teacher"
 import Course from "@/views/admin/course";
 import Anno from "@/views/admin/anno";
 import UpdateInfo from "@/views/admin/updateInfo";
+import Chapter from "@/views/admin/chapter";
 
 Vue.use(VueRouter);
 
@@ -77,6 +78,11 @@ export default new VueRouter({
                 path:"system/course",
                 name:"system/course",
                 component: Course,
+            },
+            {
+                path:"system/chapter",
+                name:"system/chapter",
+                component: Chapter,
             },
            ]
     }

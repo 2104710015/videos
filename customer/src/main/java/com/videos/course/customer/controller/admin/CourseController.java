@@ -3,6 +3,8 @@ package com.videos.course.customer.controller.admin;
 import com.videos.course.server.dto.CourseCategoryDto;
 import com.videos.course.server.dto.CourseDto;
 import com.videos.course.server.dto.PageDto;
+import com.videos.course.server.dto.SortDto;
+import com.videos.course.server.enums.BusinessExceptionEnum;
 import com.videos.course.server.service.CourseCategoryService;
 import com.videos.course.server.service.CourseService;
 import com.videos.course.server.utils.ValidatorUtils;
@@ -86,6 +88,21 @@ public class CourseController {
         return  responseVo;
     }
 
+    @ApiOperation(value = "t通过id修改课程的排序")
+    @PostMapping("/sort")
+    public ResponseVo updateSort(@RequestBody SortDto sortDto){
+        ResponseVo responseVo = new ResponseVo();
+        int i=courseService.updateSort(sortDto);
+        if (i>0){
+            responseVo.setCode("200").setMessage("操作成功");
+        }else {
+            responseVo.setBoo(false)
+                    .setCode(String.valueOf(BusinessExceptionEnum.NOT_STATUS.getCode()))
+                    .setMessage(BusinessExceptionEnum.NOT_STATUS.getDesc());
+
+        }
+        return  responseVo;
+    }
 
     /**
      * 通过id编号进行 物理删除

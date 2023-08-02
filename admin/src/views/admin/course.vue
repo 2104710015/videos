@@ -415,8 +415,40 @@
                   }
                 })
           },
-          openSort(){
+          openSort(course){//排序
             let _this = this;
+            _this.sort={
+              id:course.id,
+              oldSort: course.sort,
+              newSort: course.sort
+            };
+            //触发弹窗
+            $("#course-sort-modal").modal("show");
+          },
+          updateSort(){//触发修改的排序
+            let _this = this;
+            if (_this.sort.newSort===_this.sort.oldSort){
+              prompt.warning("没有对排序进行变化");
+             return;
+            }
+            //调用后台的接口
+            _this.$ajax.post(process.env.VUE_APP_SERVER + "/customer/admin/course/sort",_this.sort)
+                .then((res) => {
+                  console.log("修改排序的结果",res);
+                  _this.list(1);
+                  $("#course-sort-modal").modal("hide");
+                  if (res.data.boo){
+                    prompt.success("数据操作成功");
+                  }else {
+                    prompt.warning("数据操作失败");
+                  }
+                })
+          },
+          toChapter(course){
+            let _this = this;
+            //进行存储当前的课程信息
+            SessionStorage.set(SESSION_KEY_COURSE,course);
+            _this.$router.push("/system/chapter");//进行跳转到大章节中
 
           }
         }

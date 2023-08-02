@@ -350,4 +350,27 @@
       teacher_id = #{teacherId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <update id="updateSortById" parameterType="com.videos.course.server.domin.Course">
+    update course
+    set sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateSortForWord" parameterType="com.videos.course.server.dto.SortDto">
+    <![CDATA[
+    update course
+    set sort =(sort-1)
+        where
+            sort<=#{newSort} and sort>=#{oldSort}
+            and id !=#{id}
+    ]]>
+  </update>
+  <update id="updateSortBack" parameterType="com.videos.course.server.dto.SortDto">
+    <![CDATA[
+    update course
+    set sort =(sort+1)
+    where
+      sort>=#{newSort} and sort<=#{oldSort}
+      and id !=#{id}
+    ]]>
+  </update>
 </mapper>

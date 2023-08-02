@@ -4,6 +4,7 @@ package com.videos.course.server.service;
 
 import com.videos.course.server.dto.CourseDto;
 import com.videos.course.server.dto.PageDto;
+import com.videos.course.server.dto.SortDto;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface CourseService {
     public void saveAndUpdate(CourseDto courseDto);
 
     public void del(String id);
+
+    int updateSort(SortDto sortDto);
 }
